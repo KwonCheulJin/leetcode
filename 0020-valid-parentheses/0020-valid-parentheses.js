@@ -3,22 +3,21 @@
  * @return {boolean}
  */
 var isValid = function(s) {
-        const stack = [];
-        const mapping = {
-            ')': '(',
-            '}': '{',
-            ']': '['
-        };
-
-        for (const c of s) {
-            if (Object.values(mapping).includes(c)) {
-                stack.push(c);
-            } else if (mapping.hasOwnProperty(c)) {
-                if (!stack.length || mapping[c] !== stack.pop()) {
-                    return false;
-                }
+    let stack = [];
+    const pair = {
+        '(' : ')',
+        '[' : ']',
+        '{' : '}'
+    }
+    for (const char of s) {
+        if (char === '(' || char === '[' || char === '{') {
+            stack.push(char)
+        } else {
+            const pop = stack.pop()
+            if (pair[pop] !== char) {
+                stack.push(char)
             }
         }
-
-        return stack.length === 0; 
+    }
+    return stack.length <= 0;
 };

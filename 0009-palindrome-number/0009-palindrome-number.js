@@ -3,13 +3,17 @@
  * @return {boolean}
  */
 var isPalindrome = function(x) {
-    let convert = `${x}`.split('')
-    let len = convert.length;
-    let middle = Math.floor(len / 2);
-    for (let i = 0; i < middle; i++) {
-        if (convert[i] !== convert[len - 1 - i]) {
-            return false;
-        }
+    if (x < 0) {
+        return false;
     }
-    return true
+
+    let reverse = 0;
+    let xcopy = x;
+
+    while (x > 0) {
+        reverse = (reverse * 10) + (x % 10);
+        x = Math.floor(x / 10);
+    }
+
+    return reverse === xcopy; 
 };

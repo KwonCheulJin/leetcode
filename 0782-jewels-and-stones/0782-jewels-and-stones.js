@@ -4,18 +4,15 @@
  * @return {number}
  */
 var numJewelsInStones = function(jewels, stones) {
-    const hashmap = new Map();
-    let output = 0;
-    
-    for (let i = 0; i < jewels.length; i++) {
-        const jewel = jewels[i];
-        hashmap.set(jewel, i);
+    let jewelsKey = {}
+    let count = 0;
+    for (const jewel of jewels) {
+        jewelsKey[jewel] = jewelsKey[jewel] ? jewelsKey[jewel] + 1 : 1
     }
-    
-    for (let i = 0; i < stones.length; i++) {
-        const stone = stones[i];
-        if(hashmap.has(stone)) output++;
+    for (const stone of stones) {
+        if (jewelsKey[stone]) {
+            count += 1;
+        }
     }
-    
-    return output;
+    return count;
 };

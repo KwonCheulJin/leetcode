@@ -4,13 +4,18 @@
  * @return {number}
  */
 var numJewelsInStones = function(jewels, stones) {
-    const jewelSet = new Set(jewels)
-    console.log(jewelSet)
-    let count = 0;
-    for (let stone of stones) {
-        if (jewelSet.has(stone)) {
-            count++
-        }
+    const hashmap = new Map();
+    let output = 0;
+    
+    for (let i = 0; i < jewels.length; i++) {
+        const jewel = jewels[i];
+        hashmap.set(jewel, i);
     }
-    return count;
+    
+    for (let i = 0; i < stones.length; i++) {
+        const stone = stones[i];
+        if(hashmap.has(stone)) output++;
+    }
+    
+    return output;
 };

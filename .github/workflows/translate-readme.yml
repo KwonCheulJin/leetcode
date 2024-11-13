@@ -2,89 +2,48 @@ name: Translate README
 
 on:
   push:
+    branches:
+      - main
     paths:
       - '**/README.md'
+      - 'translateREADME.js'
+      - '.github/workflows/translate-readme.yml'
 
 jobs:
   translate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 전체 히스토리를 가져옴
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20.10.0'
 
       - name: Install dependencies
-        run: npm install axios
+        run: npm install
 
       - name: Find and translate README files
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
-          const axios = require('axios');
-          const fs = require('fs').promises;
-          const path = require('path');
+          # 변경된 폴더 목록 가져오기
+          CHANGED_FOLDERS=$(git diff --name-only HEAD^ HEAD | xargs -I {} dirname {} | sort -u)
 
-          async function translateText(text) {
-            try {
-              const response = await axios.post('https://api.openai.com/v1/chat/completions', {
-                model: "gpt-4",
-                messages: [
-                  { role: "system", content: "You are a translator. Translate the following text from English to Korean." },
-                  { role: "user", content: text }
-                ]
-              }, {
-                headers: {
-                  'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-                  'Content-Type': 'application/json'
-                }
-              });
-              return response.data.choices[0].message.content;
-            } catch (error) {
-              console.error('Error in translation:', error);
-              return null;
-            }
-          }
-
-          async function processReadme(file) {
-            const dir = path.dirname(file);
-            const koReadmePath = path.join(dir, 'README.ko.md');
-
-            if (await fs.access(koReadmePath).then(() => true).catch(() => false)) {
-              console.log(`Skipping ${file}, Korean version already exists`);
-              return;
-            }
-
-            console.log(`Translating ${file}`);
-            const content = await fs.readFile(file, 'utf8');
-            const translatedContent = await translateText(content);
-
-            if (translatedContent) {
-              await fs.writeFile(koReadmePath, translatedContent);
-              console.log(`Translation completed for ${file}`);
-            } else {
-              console.log(`Translation failed for ${file}`);
-            }
-          }
-
-          async function main() {
-            const files = await fs.readdir('.', { recursive: true });
-            const readmeFiles = files.filter(file => file.endsWith('README.md'));
-
-            for (const file of readmeFiles) {
-              await processReadme(file);
-            }
-          }
-
-          main().catch(console.error);
-        shell: node {0}
+          # 변경된 폴더에서 README.md 파일 번역
+          for folder in $CHANGED_FOLDERS; do
+            if [ -f "$folder/README.md" ]; then
+              echo "Processing $folder/README.md"
+              node translateREADME.js "$folder"
+            fi
+          done
 
       - name: Commit changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
-          git commit -m "Translate README to Korean" || echo "No changes to commit"
+          git diff --staged --quiet || git commit -m "Translate README to Korean"
           git push

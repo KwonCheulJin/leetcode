@@ -11,22 +11,75 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install axios
+
       - name: Find and translate README files
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
-          find . -name "README.md" | while read -r file; do
-            dir=$(dirname "$file")
-            if [ ! -f "$dir/README.ko.md" ]; then
-              echo "Translating $file"
-              npx -y gpt-translate@latest \
-                --apiKey "${{ secrets.OPENAI_API_KEY }}" \
-                --model "gpt-4" \
-                --inputFile "$file" \
-                --outputFile "$dir/README.ko.md" \
-                --language "Korean"
-            else
-              echo "Skipping $file, Korean version already exists"
-            fi
-          done
+          const axios = require('axios');
+          const fs = require('fs').promises;
+          const path = require('path');
+
+          async function translateText(text) {
+            try {
+              const response = await axios.post('https://api.openai.com/v1/chat/completions', {
+                model: "gpt-4",
+                messages: [
+                  { role: "system", content: "You are a translator. Translate the following text from English to Korean." },
+                  { role: "user", content: text }
+                ]
+              }, {
+                headers: {
+                  'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+                  'Content-Type': 'application/json'
+                }
+              });
+              return response.data.choices[0].message.content;
+            } catch (error) {
+              console.error('Error in translation:', error);
+              return null;
+            }
+          }
+
+          async function processReadme(file) {
+            const dir = path.dirname(file);
+            const koReadmePath = path.join(dir, 'README.ko.md');
+
+            if (await fs.access(koReadmePath).then(() => true).catch(() => false)) {
+              console.log(`Skipping ${file}, Korean version already exists`);
+              return;
+            }
+
+            console.log(`Translating ${file}`);
+            const content = await fs.readFile(file, 'utf8');
+            const translatedContent = await translateText(content);
+
+            if (translatedContent) {
+              await fs.writeFile(koReadmePath, translatedContent);
+              console.log(`Translation completed for ${file}`);
+            } else {
+              console.log(`Translation failed for ${file}`);
+            }
+          }
+
+          async function main() {
+            const files = await fs.readdir('.', { recursive: true });
+            const readmeFiles = files.filter(file => file.endsWith('README.md'));
+
+            for (const file of readmeFiles) {
+              await processReadme(file);
+            }
+          }
+
+          main().catch(console.error);
+        shell: node {0}
 
       - name: Commit changes
         run: |

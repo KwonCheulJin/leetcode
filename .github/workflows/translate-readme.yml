@@ -47,7 +47,7 @@ jobs:
         run: |
           git config --local user.email "chkftm12@gmail.com"
           git config --local user.name "KwonCheulJin"
-          git config pull.rebase falseㅎ
+          git config pull.rebase false
           git pull origin main
           git add .
           git diff --staged --quiet || git commit -m "Translate README to Korean"

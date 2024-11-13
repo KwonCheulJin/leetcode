@@ -49,4 +49,5 @@ jobs:
           git config --local user.name "KwonCheulJin"
           git add .
           git diff --staged --quiet || git commit -m "Translate README to Korean"
-          git push origin ${GITHUB_REF#refs/heads/}
+          git pull origin main
+          git push

@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/merge-sorted-array">88. Merge Sorted Array</a></h2><h3>쉬움</h3><hr><p>정렬된 <strong>비감소 순서</strong>의 두 정수 배열 <code>nums1</code>과 <code>nums2</code>, 그리고 각각 <code>nums1</code>과 <code>nums2</code>에 있는 요소의 개수를 나타내는 두 정수 <code>m</code>과 <code>n</code>이 주어집니다.</p>
+<h2><a href="https://leetcode.com/problems/merge-sorted-array">88. Merge Sorted Array</a></h2><h3>Easy</h3><hr><p>정렬된 <strong>비감소 순서</strong>의 두 정수 배열 <code>nums1</code>과 <code>nums2</code>, 그리고 각각 <code>nums1</code>과 <code>nums2</code>에 있는 요소의 개수를 나타내는 두 정수 <code>m</code>과 <code>n</code>이 주어집니다.</p>
 
 <p><strong>병합하여</strong> <code>nums1</code>과 <code>nums2</code>를 <strong>비감소 순서</strong>로 정렬된 단일 배열로 만들어 보세요.</p>
 

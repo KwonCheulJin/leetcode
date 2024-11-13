@@ -30,7 +30,7 @@ async function translateText(text) {
 }
 
 /**
- * README.md 파일을 README.ko.md로 번역하여 저장합니다.
+ * README.md 파일을 번역합니다.
  * @param {string} filePath - README.md 파일 경로
  * @returns {Promise<void>}
  */
@@ -62,12 +62,12 @@ async function findReadmeFiles(dir) {
       files.push(...(await findReadmeFiles(fullPath)));
     } else if (entry.isFile()) {
       const dirPath = path.dirname(fullPath);
-      const koReadmePath = path.join(dirPath, 'README.ko.md');
+      const enReadmePath = path.join(dirPath, 'README.en.md');
       const readmePath = path.join(dirPath, 'README.md');
 
-      // README.ko.md가 없고 README.md가 있는 경우만 처리
-      const hasKoReadme = await doesFileExist(koReadmePath);
-      if (!hasKoReadme && (await doesFileExist(readmePath))) {
+      // README.en.md가 없고 README.md가 있는 경우만 처리
+      const hasEnReadme = await doesFileExist(enReadmePath);
+      if (!hasEnReadme && (await doesFileExist(readmePath))) {
         files.push(readmePath);
       }
     }
@@ -82,12 +82,13 @@ async function findReadmeFiles(dir) {
  */
 async function processReadme(file) {
   const dir = path.dirname(file);
-  const koReadmePath = path.join(dir, 'README.ko.md');
+  const enReadmePath = path.join(dir, 'README.en.md');
 
   try {
     console.log(`Translating ${file}`);
     const translatedContent = await translateFile(file);
-    await fs.writeFile(koReadmePath, translatedContent);
+    await fs.writeFile(enReadmePath, await fs.readFile(file, 'utf8')); // 기존 README.md를 README.en.md로 저장
+    await fs.writeFile(file, translatedContent); // 번역된 내용을 README.md로 저장
     console.log(`Translation completed for ${file}`);
   } catch (error) {
     console.error(`Translation failed for ${file}:`, error.message);

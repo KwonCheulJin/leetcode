@@ -4,18 +4,18 @@
 <p><strong class="example">예시 1:</strong></p>
 
 <pre>
-<strong>입력:</strong> haystack = "sadbutsad", needle = "sad"
+<strong>입력:</strong> haystack = &quot;sadbutsad&quot;, needle = &quot;sad&quot;
 <strong>출력:</strong> 0
-<strong>설명:</strong> "sad"는 인덱스 0과 6에서 나타납니다.
+<strong>설명:</strong> &quot;sad&quot;는 인덱스 0과 6에서 나타납니다.
 처음 발생한 것은 인덱스 0이므로, 0을 반환합니다.
 </pre>
 
 <p><strong class="example">예시 2:</strong></p>
 
 <pre>
-<strong>입력:</strong> haystack = "leetcode", needle = "leeto"
+<strong>입력:</strong> haystack = &quot;leetcode&quot;, needle = &quot;leeto&quot;
 <strong>출력:</strong> -1
-<strong>설명:</strong> "leeto"는 "leetcode"에 나타나지 않으므로, -1을 반환합니다.
+<strong>설명:</strong> &quot;leeto&quot;는 &quot;leetcode&quot;에 나타나지 않으므로, -1을 반환합니다.
 </pre>
 
 <p>&nbsp;</p>

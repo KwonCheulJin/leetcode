@@ -1,5 +1,8 @@
 name: Translate README
 
+permissions:
+  contents: write
+
 on:
   push:
     branches:
@@ -46,4 +49,4 @@ jobs:
           git config --local user.name "KwonCheulJin"
           git add .
           git diff --staged --quiet || git commit -m "Translate README to Korean"
-          git push
+          git push origin ${GITHUB_REF#refs/heads/}

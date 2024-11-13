@@ -1,0 +1,37 @@
+name: Translate README
+
+on:
+  push:
+    paths:
+      - '**/README.md'
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Find and translate README files
+        run: |
+          find . -name "README.md" | while read -r file; do
+            dir=$(dirname "$file")
+            if [ ! -f "$dir/README.ko.md" ]; then
+              echo "Translating $file"
+              npx -y gpt-translate@latest \
+                --apiKey "${{ secrets.OPENAI_API_KEY }}" \
+                --model "gpt-4" \
+                --inputFile "$file" \
+                --outputFile "$dir/README.ko.md" \
+                --language "Korean"
+            else
+              echo "Skipping $file, Korean version already exists"
+            fi
+          done
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Translate README to Korean" || echo "No changes to commit"
+          git push

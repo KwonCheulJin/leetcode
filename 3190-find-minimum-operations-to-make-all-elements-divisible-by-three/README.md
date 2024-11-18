@@ -1,36 +1,36 @@
-<h2><a href="https://leetcode.com/problems/find-minimum-operations-to-make-all-elements-divisible-by-three">3190. Find Minimum Operations to Make All Elements Divisible by Three</a></h2><h3>Easy</h3><hr><p>You are given an integer array <code>nums</code>. In one operation, you can add or subtract 1 from <strong>any</strong> element of <code>nums</code>.</p>
+<h2><a href="https://leetcode.com/problems/find-minimum-operations-to-make-all-elements-divisible-by-three">3190. 모든 요소를 3으로 나누어떨어지게 만들기 위한 최소 연산 찾기</a></h2><h3>쉬움</h3><hr><p>정수 배열 <code>nums</code>가 주어집니다. 한 번의 연산에서 <code>nums</code>의 <strong>어느</strong> 요소에 1을 더하거나 뺄 수 있습니다.</p>
 
-<p>Return the <strong>minimum</strong> number of operations to make all elements of <code>nums</code> divisible by 3.</p>
+<p>모든 <code>nums</code>의 요소를 3으로 나누어떨어지게 만들기 위한 <strong>최소</strong> 연산 수를 반환하세요.</p>
 
 <p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
+<p><strong class="example">예시 1:</strong></p>
 
 <div class="example-block">
-<p><strong>Input:</strong> <span class="example-io">nums = [1,2,3,4]</span></p>
+<p><strong>입력:</strong> <span class="example-io">nums = [1,2,3,4]</span></p>
 
-<p><strong>Output:</strong> <span class="example-io">3</span></p>
+<p><strong>출력:</strong> <span class="example-io">3</span></p>
 
-<p><strong>Explanation:</strong></p>
+<p><strong>설명:</strong></p>
 
-<p>All array elements can be made divisible by 3 using 3 operations:</p>
+<p>모든 배열 요소를 3으로 나누어떨어지게 만들기 위해 3번의 연산이 필요합니다:</p>
 
 <ul>
-	<li>Subtract 1 from 1.</li>
-	<li>Add 1 to 2.</li>
-	<li>Subtract 1 from 4.</li>
+	<li>1에서 1을 뺍니다.</li>
+	<li>2에 1을 더합니다.</li>
+	<li>4에서 1을 뺍니다.</li>
 </ul>
 </div>
 
-<p><strong class="example">Example 2:</strong></p>
+<p><strong class="example">예시 2:</strong></p>
 
 <div class="example-block">
-<p><strong>Input:</strong> <span class="example-io">nums = [3,6,9]</span></p>
+<p><strong>입력:</strong> <span class="example-io">nums = [3,6,9]</span></p>
 
-<p><strong>Output:</strong> <span class="example-io">0</span></p>
+<p><strong>출력:</strong> <span class="example-io">0</span></p>
 </div>
 
 <p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
+<p><strong>제약사항:</strong></p>
 
 <ul>
 	<li><code>1 &lt;= nums.length &lt;= 50</code></li>

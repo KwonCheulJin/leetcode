@@ -31,17 +31,7 @@ jobs:
       - name: Find and translate README files
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: |
-          # 변경된 폴더 목록 가져오기
-          CHANGED_FOLDERS=$(git diff --name-only HEAD^ HEAD | xargs -I {} dirname {} | sort -u)
-
-          # 변경된 폴더에서 README.md 파일 번역
-          for folder in $CHANGED_FOLDERS; do
-            if [ -f "$folder/README.md" ]; then
-              echo "Processing $folder/README.md"
-              node translateREADME.js "$folder"
-            fi
-          done
+        run: npm run translate:changed
 
       - name: Commit changes
         run: |

@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "translate": "node app/translateREADME.js",
+    "translate:changed": "git diff --name-only HEAD^ HEAD | xargs -I {} dirname {} | sort -u | xargs -I {} sh -c 'if [ -f \"{}/README.md\" ]; then npm run translate \"{}\" ; fi'"
   },
   "keywords": [],
   "author": "",

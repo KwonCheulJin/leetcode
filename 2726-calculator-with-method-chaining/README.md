@@ -1,63 +1,63 @@
-<h2><a href="https://leetcode.com/problems/calculator-with-method-chaining">2726. Calculator with Method Chaining</a></h2><h3>Easy</h3><hr><p>Design a <code>Calculator</code> class. The class should provide the&nbsp;mathematical operations of&nbsp;addition, subtraction, multiplication, division, and exponentiation. It should also allow consecutive operations to be performed using method chaining.&nbsp;The <code>Calculator</code> class constructor should accept a number&nbsp;which serves as the&nbsp;initial value of <code>result</code>.</p>
+<h2><a href="https://leetcode.com/problems/calculator-with-method-chaining">2726. 메소드 체이닝을 이용한 계산기</a></h2><h3>쉬움</h3><hr><p><code>Calculator</code> 클래스를 설계하세요. 이 클래스는 덧셈, 뺄셈, 곱셈, 나눗셈, 지수 계산의 수학적 연산 기능을 제공해야 합니다. 또한 메소드 체이닝을 사용하여 연속적인 연산을 수행할 수 있어야 합니다. <code>Calculator</code> 클래스 생성자는 <code>result</code>의 초기 값으로 사용할 숫자를 인수로 받아야 합니다.</p>
 
-<p>Your <font face="monospace"><code>Calculator</code>&nbsp;</font>class should have the following methods:</p>
+<p><font face="monospace"><code>Calculator</code>&nbsp;</font>클래스는 다음의 메소드를 가져야 합니다:</p>
 
 <ul>
-	<li><code>add</code> - This method adds the given number <code>value</code> to the&nbsp;<code>result</code> and returns the updated <code>Calculator</code>.</li>
-	<li><code>subtract</code> -&nbsp;This method subtracts the given number <code>value</code>&nbsp;from the&nbsp;<code>result</code> and returns the updated <code>Calculator</code>.</li>
-	<li><code>multiply</code> -&nbsp;This method multiplies the <code>result</code>&nbsp; by the given number <code>value</code> and returns the updated <code>Calculator</code>.</li>
-	<li><code>divide</code> -&nbsp;This method divides the <code>result</code> by the given number <code>value</code> and returns the updated <code>Calculator</code>. If the passed value is <code>0</code>, an error <code>&quot;Division by zero is not allowed&quot;</code> should be thrown.</li>
-	<li><code>power</code> -&nbsp;This method raises the&nbsp;<code>result</code> to the power of the given number <code>value</code> and returns the updated <code>Calculator</code>.</li>
-	<li><code>getResult</code> -&nbsp;This method returns the <code>result</code>.</li>
+	<li><code>add</code> - 이 메소드는 주어진 숫자 <code>value</code>를 <code>result</code>에 더하고 업데이트된 <code>Calculator</code>를 반환합니다.</li>
+	<li><code>subtract</code> - 이 메소드는 주어진 숫자 <code>value</code>를 <code>result</code>에서 빼고 업데이트된 <code>Calculator</code>를 반환합니다.</li>
+	<li><code>multiply</code> - 이 메소드는 <code>result</code>를 주어진 숫자 <code>value</code>와 곱하고 업데이트된 <code>Calculator</code>를 반환합니다.</li>
+	<li><code>divide</code> - 이 메소드는 <code>result</code>를 주어진 숫자 <code>value</code>로 나누고 업데이트된 <code>Calculator</code>를 반환합니다. 만약 전달된 값이 <code>0</code>이면, 오류 <code>&quot;Division by zero is not allowed&quot;</code>를 발생시켜야 합니다.</li>
+	<li><code>power</code> - 이 메소드는 <code>result</code>를 주어진 숫자 <code>value</code>의 지수로 올리고 업데이트된 <code>Calculator</code>를 반환합니다.</li>
+	<li><code>getResult</code> - 이 메소드는 <code>result</code>를 반환합니다.</li>
 </ul>
 
-<p>Solutions within&nbsp;<code>10<sup>-5</sup></code>&nbsp;of the actual result are considered correct.</p>
+<p><code>10<sup>-5</sup></code> 범위 이내의 솔루션은 정확한 것으로 간주됩니다.</p>
 
 <p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
+<p><strong class="example">예제 1:</strong></p>
 
 <pre>
-<strong>Input:</strong> 
-actions = [&quot;Calculator&quot;, &quot;add&quot;, &quot;subtract&quot;, &quot;getResult&quot;], 
+<strong>입력:</strong> 
+actions = ["Calculator", "add", "subtract", "getResult"], 
 values = [10, 5, 7]
-<strong>Output:</strong> 8
-<strong>Explanation:</strong> 
+<strong>출력:</strong> 8
+<strong>설명:</strong> 
 new Calculator(10).add(5).subtract(7).getResult() // 10 + 5 - 7 = 8
 </pre>
 
-<p><strong class="example">Example 2:</strong></p>
+<p><strong class="example">예제 2:</strong></p>
 
 <pre>
-<strong>Input:</strong> 
-actions = [&quot;Calculator&quot;, &quot;multiply&quot;, &quot;power&quot;, &quot;getResult&quot;], 
+<strong>입력:</strong> 
+actions = ["Calculator", "multiply", "power", "getResult"], 
 values = [2, 5, 2]
-<strong>Output:</strong> 100
-<strong>Explanation:</strong> 
+<strong>출력:</strong> 100
+<strong>설명:</strong> 
 new Calculator(2).multiply(5).power(2).getResult() // (2 * 5) ^ 2 = 100
 </pre>
 
-<p><strong class="example">Example 3:</strong></p>
+<p><strong class="example">예제 3:</strong></p>
 
 <pre>
-<strong>Input:</strong> 
-actions = [&quot;Calculator&quot;, &quot;divide&quot;, &quot;getResult&quot;], 
+<strong>입력:</strong> 
+actions = ["Calculator", "divide", "getResult"], 
 values = [20, 0]
-<strong>Output:</strong> &quot;Division by zero is not allowed&quot;
-<strong>Explanation:</strong> 
+<strong>출력:</strong> "Division by zero is not allowed"
+<strong>설명:</strong> 
 new Calculator(20).divide(0).getResult() // 20 / 0 
 
-The error should be thrown because we cannot divide by zero.
+0으로 나눌 수 없기 때문에 오류가 발생해야 합니다.
 </pre>
 
 <p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
+<p><strong>제약 조건:</strong></p>
 
 <ul>
-	<li><code>actions</code> is a valid JSON array of strings</li>
-	<li><code>values</code>&nbsp;is a valid JSON array of numbers</li>
+	<li><code>actions</code>은 문자열의 유효한 JSON 배열입니다</li>
+	<li><code>values</code>&nbsp;는 숫자의 유효한 JSON 배열입니다</li>
 	<li><code>2 &lt;= actions.length &lt;= 2 * 10<sup>4</sup></code></li>
 	<li><code>1 &lt;= values.length &lt;= 2 * 10<sup>4</sup>&nbsp;- 1</code></li>
-	<li><code>actions[i]</code> is one of &quot;Calculator&quot;, &quot;add&quot;, &quot;subtract&quot;, &quot;multiply&quot;, &quot;divide&quot;, &quot;power&quot;, and&nbsp;&quot;getResult&quot;</li>
-	<li>First action is always &quot;Calculator&quot;</li>
-	<li>Last action is always &quot;getResult&quot;</li>
+	<li><code>actions[i]</code>는 &quot;Calculator&quot;, &quot;add&quot;, &quot;subtract&quot;, &quot;multiply&quot;, &quot;divide&quot;, &quot;power&quot;, &quot;getResult&quot; 중 하나입니다</li>
+	<li>첫 번째 액션은 항상 &quot;Calculator&quot;입니다</li>
+	<li>마지막 액션은 항상 &quot;getResult&quot;입니다</li>
 </ul>

@@ -9,26 +9,7 @@ const symbolMap:Record<string, number> = {
 }
 
 function romanToInt(s: string): number {
-    let result = 0;
+    const numbers = s.split('').map(c => symbolMap[c])
 
-    s.split('').forEach((char, i) => {
-        if (char === 'I') {
-            if (s[i + 1] === 'V' || s[i + 1] === 'X') {
-                result -= (symbolMap[char] * 2)
-            }
-        }
-        if (char === 'X') {
-            if (s[i + 1] === 'L' || s[i + 1] === 'C') {
-                result -= (symbolMap[char] * 2)
-            }
-        }
-        if (char === 'C') {
-            if (s[i + 1] === 'D' || s[i + 1] === 'M') {
-                result -= (symbolMap[char] * 2)
-            }
-        }
-        result += symbolMap[char]
-    })
-
-    return result
+    return numbers.reduce((acc, cur, i) => cur < numbers[i + 1] ? acc - cur : acc + cur, 0)
 };

@@ -1,27 +1,26 @@
-<h2><a href="https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string">28. 문자열에서 처음 등장하는 위치의 인덱스를 찾기</a></h2><h3>쉬움</h3><hr><p>두 문자열 <code>needle</code>과 <code>haystack</code>이 주어질 때, <code>needle</code>이 <code>haystack</code>의 부분일 경우 <code>needle</code>이 처음 등장하는 인덱스를 반환하고, 그렇지 않으면 <code>-1</code>을 반환하세요.</p>
+<h2><a href="https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string">28. Find the Index of the First Occurrence in a String</a></h2><h3>쉬움</h3><hr><p>Given two strings <code>needle</code> and <code>haystack</code>, return the index of the first occurrence of <code>needle</code> in <code>haystack</code>, or <code>-1</code> if <code>needle</code> is not part of <code>haystack</code>.</p>
 
 <p>&nbsp;</p>
-<p><strong class="example">예제 1:</strong></p>
+<p><strong class="example">Example 1:</strong></p>
 
 <pre>
-<strong>입력:</strong> haystack = "sadbutsad", needle = "sad"
-<strong>출력:</strong> 0
-<strong>설명:</strong> "sad"는 인덱스 0과 6에서 나타납니다.
-첫 번째로 등장하는 위치는 인덱스 0이므로, 0을 반환합니다.
+<strong>Input:</strong> haystack = "sadbutsad", needle = "sad"
+<strong>Output:</strong> 0
+<strong>Explanation:</strong> "sad" occurs at index 0 and 6. The first occurrence is at index 0, so we return 0.
 </pre>
 
-<p><strong class="example">예제 2:</strong></p>
+<p><strong class="example">Example 2:</strong></p>
 
 <pre>
-<strong>입력:</strong> haystack = "leetcode", needle = "leeto"
-<strong>출력:</strong> -1
-<strong>설명:</strong> "leeto"는 "leetcode"에 나타나지 않으므로, -1을 반환합니다.
+<strong>Input:</strong> haystack = "leetcode", needle = "leeto"
+<strong>Output:</strong> -1
+<strong>Explanation:</strong> "leeto" did not occur in "leetcode", so we return -1.
 </pre>
 
 <p>&nbsp;</p>
-<p><strong>제약 조건:</strong></p>
+<p><strong>Constraints:</strong></p>
 
 <ul>
 	<li><code>1 &lt;= haystack.length, needle.length &lt;= 10<sup>4</sup></code></li>
-	<li><code>haystack</code>과 <code>needle</code>은 소문자 영어 문자로만 이루어져 있습니다.</li>
+	<li><code>haystack</code> and <code>needle</code> consist only of lowercase English characters.</li>
 </ul>

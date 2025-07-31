@@ -1,30 +1,30 @@
-<h2><a href="https://leetcode.com/problems/binary-search">704. Binary Search</a></h2><h3>Easy</h3><hr><p>Given an array of integers <code>nums</code> which is sorted in ascending order, and an integer <code>target</code>, write a function to search <code>target</code> in <code>nums</code>. If <code>target</code> exists, then return its index. Otherwise, return <code>-1</code>.</p>
+<h2><a href="https://leetcode.com/problems/binary-search">704. 이진 검색</a></h2><h3>쉬움</h3><hr><p>정수 배열 <code>nums</code>가 오름차순으로 정렬되어 있고, 정수 <code>target</code>이 주어졌을 때, <code>nums</code>에서 <code>target</code>을 검색하는 함수를 작성하세요. <code>target</code>이 존재하면 해당 인덱스를 반환하세요. 그렇지 않으면 <code>-1</code>을 반환하세요.</p>
 
-<p>You must write an algorithm with <code>O(log n)</code> runtime complexity.</p>
-
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
-
-<pre>
-<strong>Input:</strong> nums = [-1,0,3,5,9,12], target = 9
-<strong>Output:</strong> 4
-<strong>Explanation:</strong> 9 exists in nums and its index is 4
-</pre>
-
-<p><strong class="example">Example 2:</strong></p>
-
-<pre>
-<strong>Input:</strong> nums = [-1,0,3,5,9,12], target = 2
-<strong>Output:</strong> -1
-<strong>Explanation:</strong> 2 does not exist in nums so return -1
-</pre>
+<p>런타임 복잡도가 <code>O(log n)</code>인 알고리즘을 작성해야 합니다.</p>
 
 <p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
+<p><strong class="example">예제 1:</strong></p>
+
+<pre>
+<strong>입력:</strong> nums = [-1,0,3,5,9,12], target = 9
+<strong>출력:</strong> 4
+<strong>설명:</strong> 9는 nums에 존재하며 그 인덱스는 4입니다.
+</pre>
+
+<p><strong class="example">예제 2:</strong></p>
+
+<pre>
+<strong>입력:</strong> nums = [-1,0,3,5,9,12], target = 2
+<strong>출력:</strong> -1
+<strong>설명:</strong> 2는 nums에 존재하지 않으므로 -1을 반환합니다.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>제약 조건:</strong></p>
 
 <ul>
 	<li><code>1 &lt;= nums.length &lt;= 10<sup>4</sup></code></li>
 	<li><code>-10<sup>4</sup> &lt; nums[i], target &lt; 10<sup>4</sup></code></li>
-	<li>All the integers in <code>nums</code> are <strong>unique</strong>.</li>
-	<li><code>nums</code> is sorted in ascending order.</li>
+	<li>모든 <code>nums</code>의 정수는 <strong>고유합니다</strong>.</li>
+	<li><code>nums</code>는 오름차순으로 정렬되어 있습니다.</li>
 </ul>

@@ -13,6 +13,7 @@ on:
       - 'tsconfig.json'
       - 'package.json'
       - '.github/workflows/translate-readme.yml'
+  workflow_dispatch: # 수동 실행 지원
 
 jobs:
   translate:
@@ -37,7 +38,7 @@ jobs:
       - name: Find and translate README files
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: npm run translate:changed
+        run: npm run translate
 
       - name: Commit changes
         run: |
@@ -60,5 +61,8 @@ jobs:
           }
           
           git add .
-          git diff --staged --quiet || git commit -m "Translate README to Korean [automated]"
+          git diff --staged --quiet || git commit -m "Update Korean translations [automated] 
+          
+          - Translated README files using smart detection system
+          - Updated metadata for change tracking"
           git push

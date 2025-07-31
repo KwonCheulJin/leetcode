@@ -14,7 +14,7 @@
 <p><strong>제약 조건:</strong></p>
 
 <ul>
-	<li><code>1 &lt;= jewels.length, stones.length &lt;= 50</code></li>
+	<li><code>1 &lt;=&nbsp;jewels.length, stones.length &lt;= 50</code></li>
 	<li><code>jewels</code>와 <code>stones</code>은 오직 영어 알파벳으로만 구성됩니다.</li>
 	<li><code>jewels</code>의 모든 문자는 <strong>유일</strong>합니다.</li>
 </ul>

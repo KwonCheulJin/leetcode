@@ -1,6 +1,6 @@
-<h2><a href="https://leetcode.com/problems/find-minimum-operations-to-make-all-elements-divisible-by-three">3190. 모든 요소를 3으로 나누어 떨어지게 하는 최소 작업 수 찾기</a></h2><h3>쉬움</h3><hr><p>정수 배열 <code>nums</code>가 주어집니다. 하나의 작업에서 <code>nums</code>의 <strong>어떤</strong> 요소에 1을 더하거나 뺄 수 있습니다.</p>
+<h2><a href="https://leetcode.com/problems/find-minimum-operations-to-make-all-elements-divisible-by-three">3190. 모든 요소를 3으로 나눌 수 있도록 최소 작업 수 찾기</a></h2><h3>쉬움</h3><hr><p>정수 배열 <code>nums</code>가 주어집니다. 하나의 작업에서 <code>nums</code>의 <strong>어떤</strong> 요소든 1을 더하거나 뺄 수 있습니다.</p>
 
-<p><code>nums</code>의 모든 요소를 3으로 나누어 떨어지게 만들기 위한 <strong>최소</strong> 작업 수를 반환하세요.</p>
+<p>모든 <code>nums</code> 요소를 3으로 나눌 수 있도록 만드는 <strong>최소</strong> 작업 수를 반환하세요.</p>
 
 <p>&nbsp;</p>
 <p><strong class="example">예제 1:</strong></p>
@@ -12,7 +12,7 @@
 
 <p><strong>설명:</strong></p>
 
-<p>모든 배열 요소는 3개의 작업을 통해 3으로 나누어 떨어지게 만들 수 있습니다:</p>
+<p>모든 배열 요소를 3으로 나눌 수 있도록 3번의 작업이 필요합니다:</p>
 
 <ul>
 	<li>1에서 1을 뺍니다.</li>

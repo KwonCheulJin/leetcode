@@ -6,7 +6,7 @@
 <pre>
 <strong>입력:</strong> 
 n = 10 
-["call","call","call"]
+[&quot;call&quot;,&quot;call&quot;,&quot;call&quot;]
 <strong>출력:</strong> [10,11,12]
 <strong>설명: 
 </strong>counter() = 10 // counter()가 처음 호출되었을 때, n을 반환합니다.
@@ -19,7 +19,7 @@ counter() = 12 // 이전 호출보다 1 더 많은 값을 반환합니다.
 <pre>
 <strong>입력:</strong> 
 n = -2
-["call","call","call","call","call"]
+[&quot;call&quot;,&quot;call&quot;,&quot;call&quot;,&quot;call&quot;,&quot;call&quot;]
 <strong>출력:</strong> [-2,-1,0,1,2]
 <strong>설명:</strong> counter()는 처음에 -2를 반환합니다. 그 후 각 호출마다 증가합니다.
 </pre>
@@ -30,5 +30,5 @@ n = -2
 <ul>
 	<li><code>-1000&lt;= n &lt;= 1000</code></li>
 	<li><code>0 &lt;= calls.length &lt;= 1000</code></li>
-	<li><code>calls[i] === "call"</code></li>
+	<li><code>calls[i] === &quot;call&quot;</code></li>
 </ul>

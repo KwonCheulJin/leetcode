@@ -53,6 +53,6 @@
 <p><strong>제약 사항:</strong></p>
 
 <ul>
-	<li><code>1 &lt;= s.length &lt;= 10<sup>4</sup></code></li>
+	<li><code>1 <= s.length <= 10<sup>4</sup></code></li>
 	<li><code>s</code>는 괄호만으로 구성되어 있습니다 <code>'()[]{}'</code>.</li>
 </ul>

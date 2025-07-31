@@ -21,7 +21,7 @@ int k = removeElement(nums, val); // 구현한 함수 호출
 
 assert k == expectedNums.length;
 sort(nums, 0, k); // nums의 처음 k 요소를 정렬
-for (int i = 0; i < actualLength; i++) {
+for (int i = 0; i &lt; actualLength; i++) {
     assert nums[i] == expectedNums[i];
 }
 </pre>

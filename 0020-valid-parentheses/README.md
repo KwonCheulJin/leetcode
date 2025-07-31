@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/valid-parentheses">20. 유효한 괄호</a></h2><h3>쉬움</h3><hr><p>문자 <code>&#39;(&#39;</code>, <code>&#39;)&#39;</code>, <code>&#39;{&#39;</code>, <code>&#39;}&#39;</code>, <code>&#39;[&#39;</code>, <code>&#39;]&#39;</code> 만 포함된 문자열 <code>s</code>가 주어질 때, 입력 문자열이 유효한지 확인하세요.</p>
+<h2><a href="https://leetcode.com/problems/valid-parentheses">20. 유효한 괄호</a></h2><h3>쉬움</h3><hr><p>문자 <code>'('</code>, <code>')'</code>, <code>'{'</code>, <code>'}'</code>, <code>'['</code>, <code>']'</code> 만 포함된 문자열 <code>s</code>가 주어질 때, 입력 문자열이 유효한지 확인하세요.</p>
 
 <p>입력 문자열이 유효하려면 다음을 만족해야 합니다:</p>
 
@@ -12,7 +12,7 @@
 <p><strong class="example">예시 1:</strong></p>
 
 <div class="example-block">
-<p><strong>입력:</strong> <span class="example-io">s = &quot;()&quot;</span></p>
+<p><strong>입력:</strong> <span class="example-io">s = "()"</span></p>
 
 <p><strong>출력:</strong> <span class="example-io">true</span></p>
 </div>
@@ -20,7 +20,7 @@
 <p><strong class="example">예시 2:</strong></p>
 
 <div class="example-block">
-<p><strong>입력:</strong> <span class="example-io">s = &quot;()[]{}&quot;</span></p>
+<p><strong>입력:</strong> <span class="example-io">s = "()[]{}"</span></p>
 
 <p><strong>출력:</strong> <span class="example-io">true</span></p>
 </div>
@@ -28,7 +28,7 @@
 <p><strong class="example">예시 3:</strong></p>
 
 <div class="example-block">
-<p><strong>입력:</strong> <span class="example-io">s = &quot;(]&quot;</span></p>
+<p><strong>입력:</strong> <span class="example-io">s = "(]"</span></p>
 
 <p><strong>출력:</strong> <span class="example-io">false</span></p>
 </div>
@@ -36,7 +36,7 @@
 <p><strong class="example">예시 4:</strong></p>
 
 <div class="example-block">
-<p><strong>입력:</strong> <span class="example-io">s = &quot;([])&quot;</span></p>
+<p><strong>입력:</strong> <span class="example-io">s = "([])"</span></p>
 
 <p><strong>출력:</strong> <span class="example-io">true</span></p>
 </div>
@@ -44,7 +44,7 @@
 <p><strong class="example">예시 5:</strong></p>
 
 <div class="example-block">
-<p><strong>입력:</strong> <span class="example-io">s = &quot;([)]&quot;</span></p>
+<p><strong>입력:</strong> <span class="example-io">s = "([)]"</span></p>
 
 <p><strong>출력:</strong> <span class="example-io">false</span></p>
 </div>
@@ -54,5 +54,5 @@
 
 <ul>
 	<li><code>1 &lt;= s.length &lt;= 10<sup>4</sup></code></li>
-	<li><code>s</code>는 괄호만으로 구성되어 있습니다 <code>&#39;()[]{}&#39;</code>.</li>
+	<li><code>s</code>는 괄호만으로 구성되어 있습니다 <code>'()[]{}'</code>.</li>
 </ul>

@@ -10,7 +10,7 @@
 
 <p>정수 배열 <code>piles</code>가 주어질 때, <code>piles[i]</code>는 <code>i<sup>번째</sup></code> 더미에 있는 동전의 수를 나타냅니다.</p>
 
-<p>당신이 가질 수 있는 최대 동전 수를 반환하세요.</p>
+<p>여러분이 가질 수 있는 최대 동전 수를 반환하세요.</p>
 
 <p>&nbsp;</p>
 <p><strong class="example">예제 1:</strong></p>

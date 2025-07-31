@@ -17,34 +17,34 @@
 <p><strong class="example">예시 1:</strong></p>
 
 <pre>
-<strong>입력:</strong> 
-actions = [&quot;Calculator&quot;, &quot;add&quot;, &quot;subtract&quot;, &quot;getResult&quot;], 
+<strong>입력:</strong>
+actions = ["Calculator", "add", "subtract", "getResult"],
 values = [10, 5, 7]
 <strong>출력:</strong> 8
-<strong>설명:</strong> 
+<strong>설명:</strong>
 new Calculator(10).add(5).subtract(7).getResult() // 10 + 5 - 7 = 8
 </pre>
 
 <p><strong class="example">예시 2:</strong></p>
 
 <pre>
-<strong>입력:</strong> 
-actions = [&quot;Calculator&quot;, &quot;multiply&quot;, &quot;power&quot;, &quot;getResult&quot;], 
+<strong>입력:</strong>
+actions = ["Calculator", "multiply", "power", "getResult"],
 values = [2, 5, 2]
 <strong>출력:</strong> 100
-<strong>설명:</strong> 
+<strong>설명:</strong>
 new Calculator(2).multiply(5).power(2).getResult() // (2 * 5) ^ 2 = 100
 </pre>
 
 <p><strong class="example">예시 3:</strong></p>
 
 <pre>
-<strong>입력:</strong> 
-actions = [&quot;Calculator&quot;, &quot;divide&quot;, &quot;getResult&quot;], 
+<strong>입력:</strong>
+actions = ["Calculator", "divide", "getResult"],
 values = [20, 0]
-<strong>출력:</strong> &quot;Division by zero is not allowed&quot;
-<strong>설명:</strong> 
-new Calculator(20).divide(0).getResult() // 20 / 0 
+<strong>출력:</strong> "Division by zero is not allowed"
+<strong>설명:</strong>
+new Calculator(20).divide(0).getResult() // 20 / 0
 
 0으로 나눌 수 없기 때문에 오류가 발생해야 합니다.
 </pre>

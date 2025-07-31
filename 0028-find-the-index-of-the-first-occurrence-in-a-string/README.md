@@ -1,7 +1,7 @@
 <h2><a href="https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string">28. 문자열에서 처음 발생한 인덱스 찾기</a></h2><h3>쉬움</h3><hr><p>주어진 두 문자열 <code>needle</code>과 <code>haystack</code>이 있을 때, <code>needle</code>이 <code>haystack</code>에서 처음 발생하는 인덱스를 반환하거나, <code>needle</code>이 <code>haystack</code>의 일부가 아닐 경우 <code>-1</code>을 반환하세요.</p>
 
 <p>&nbsp;</p>
-<p><strong class="example">예시 1:</strong></p>
+<p><strong class="example">예제 1:</strong></p>
 
 <pre>
 <strong>입력:</strong> haystack = "sadbutsad", needle = "sad"
@@ -9,7 +9,7 @@
 <strong>설명:</strong> "sad"는 인덱스 0과 6에서 발생합니다. 처음 발생한 위치는 인덱스 0이므로, 0을 반환합니다.
 </pre>
 
-<p><strong class="example">예시 2:</strong></p>
+<p><strong class="example">예제 2:</strong></p>
 
 <pre>
 <strong>입력:</strong> haystack = "leetcode", needle = "leeto"

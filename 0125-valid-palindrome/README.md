@@ -3,7 +3,7 @@
 <p>Given a string <code>s</code>, return <code>true</code> if it is a <strong>palindrome</strong>; otherwise, return <code>false</code>.</p>
 
 <p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
+<p><strong class="example">예제 1:</strong></p>
 
 <pre>
 <strong>Input:</strong> s = &quot;A man, a plan, a canal: Panama&quot;
@@ -11,7 +11,7 @@
 <strong>Explanation:</strong> &quot;amanaplanacanalpanama&quot; is a palindrome.
 </pre>
 
-<p><strong class="example">Example 2:</strong></p>
+<p><strong class="example">예제 2:</strong></p>
 
 <pre>
 <strong>Input:</strong> s = &quot;race a car&quot;
@@ -19,7 +19,7 @@
 <strong>Explanation:</strong> &quot;raceacar&quot; is not a palindrome.
 </pre>
 
-<p><strong class="example">Example 3:</strong></p>
+<p><strong class="example">예제 3:</strong></p>
 
 <pre>
 <strong>Input:</strong> s = &quot; &quot;
@@ -29,9 +29,9 @@ An empty string reads the same forwards and backwards, thus it is a palindrome.
 </pre>
 
 <p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
+<p><strong>제약조건:</strong></p>
 
 <ul>
 	<li><code>1 &lt;= s.length &lt;= 2 * 10<sup>5</sup></code></li>
-	<li><code>s</code> consists only of printable ASCII characters.</li>
+	<li><code>s</code>는 출력 가능한 ASCII 문자로만 구성됩니다.</li>
 </ul>

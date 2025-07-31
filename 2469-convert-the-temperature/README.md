@@ -29,7 +29,7 @@
 </pre>
 
 <p>&nbsp;</p>
-<p><strong>제약사항:</strong></p>
+<p><strong>제한 사항:</strong></p>
 
 <ul>
 	<li><code>0 &lt;= celsius &lt;= 1000</code></li>

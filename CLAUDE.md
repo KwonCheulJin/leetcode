@@ -13,7 +13,11 @@
 - `npm run translate:file <파일경로>` - 개별 파일을 번역 (예: `npm run translate:file TRANSLATION_SYSTEM.md`)
 - `npm run translate:file <파일경로> -- --force` - 메타데이터 무시하고 강제 번역
 - `npm run translate:changed` - 마지막 커밋에서 변경된 README 파일만 번역
-- `npm run test:setup` - 번역 시스템 테스트 환경 설정
+
+### 테스트 스크립트
+- `npm test` - 번역 시스템 통합 테스트 실행
+- `npm run test:run` - 번역 시스템 통합 테스트 실행 (별칭)
+- `npm run test:setup` - 테스트 환경 설정만 실행
 - `npm run test:cleanup` - 테스트 환경 정리
 - `npm run type-check` - TypeScript 타입 검사
 
@@ -26,6 +30,8 @@
   - `README.md` (한국어, 번역된 버전)
   - `README.en.md` (영어 원본)
   - `README.md.meta.json` (번역 메타데이터, .gitignore에 포함)
+- `app/` 디렉토리: 번역 시스템 코어 파일들
+- `test/` 디렉토리: TypeScript 테스트 스크립트들
 
 ### 솔루션 파일
 - TypeScript (`.ts`) 또는 JavaScript (`.js`)로 구현
@@ -46,6 +52,13 @@
   - 단일 파일 처리에 최적화
   - 상세한 로깅 및 진행 상황 표시
   - 강제 번역 모드 지원
+
+#### 테스트 파일
+- `test/translationTest.ts` - 번역 시스템 통합 테스트:
+  - TypeScript로 작성된 포괄적 테스트 스위트
+  - 초기 번역, 변경 감지, 재번역 시나리오 검증
+  - 자동화된 테스트 결과 보고서 생성
+  - 성능 및 안정성 측정
 
 #### 주요 기능
 - **스마트 변경 감지**: README.en.md가 존재해도 README.md 업데이트 감지
@@ -99,8 +112,9 @@ npm run translate:file <파일경로>                    # 개별 파일 번역
 npm run translate:file TRANSLATION_SYSTEM.md        # 예시: 특정 파일 번역
 npm run translate:file README.md -- --force         # 강제 번역 모드
 
-# 테스트 환경
-npm run test:setup       # 테스트 환경 생성
+# 통합 테스트
+npm test                 # 전체 번역 시스템 테스트 실행
+npm run test:setup       # 테스트 환경만 생성
 npm run test:cleanup     # 테스트 환경 정리
 ```
 

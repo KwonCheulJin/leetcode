@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/counter-ii">2665. Counter II</a></h2><h3>Easy</h3><hr><p>함수 <code>createCounter</code>를 작성하세요. 이 함수는 초기 정수 <code>init</code>를 받아야 합니다. 이 함수는 세 개의 함수를 가진 객체를 반환해야 합니다.</p>
+<h2><a href="https://leetcode.com/problems/counter-ii">2665. Counter II</a></h2><h3>쉬움</h3><hr><p>함수 <code>createCounter</code>를 작성하세요. 이 함수는 초기 정수 <code>init</code>를 받아야 합니다. 이 함수는 세 개의 함수를 가진 객체를 반환해야 합니다.</p>
 
 <p>세 개의 함수는 다음과 같습니다:</p>
 

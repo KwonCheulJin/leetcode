@@ -5,9 +5,9 @@
 <p>입력 함수는 <strong>3</strong>가지가 있을 수 있다고 가정합니다: <code>sum</code><strong>, </strong><code>fib</code><strong>, </strong>및 <code>factorial</code><strong>.</strong></p>
 
 <ul>
-	<li><code>sum</code><strong> </strong>은 두 개의 정수&nbsp;<code>a</code>와 <code>b</code>를 받아 <code>a + b</code>를 반환합니다. 만약 <code>a != b</code>인&nbsp;<code>(b, a)</code> 인수에 대해 값이 이미 캐시되어 있다면, 그것은 <code>(a, b)</code> 인수들에 대해 사용될 수 없습니다. 예를 들어, 인수가&nbsp;<code>(3, 2)</code>와 <code>(2, 3)</code>일 경우, 두 번의 별도 호출이 이루어져야 합니다.</li>
-	<li><code>fib</code><strong> </strong>는 한 개의 정수&nbsp;<code>n</code>을 받아서&nbsp;<code>n &lt;= 1</code>이면&nbsp;<code>1</code>을 반환하고, 그렇지 않으면&nbsp;<code>fib(n - 1) + fib(n - 2)</code>를 반환합니다.</li>
-	<li><code>factorial</code>은 한 개의 정수&nbsp;<code>n</code>을 받아서&nbsp;<code>n &lt;= 1</code>이면&nbsp;<code>1</code>을 반환하고, 그렇지 않으면&nbsp;<code>factorial(n - 1) * n</code>을 반환합니다.</li>
+	<li><code>sum</code><strong> </strong>은 두 개의 정수 <code>a</code>와 <code>b</code>를 받아 <code>a + b</code>를 반환합니다. 만약 <code>a != b</code>인 <code>(b, a)</code> 인수에 대해 값이 이미 캐시되어 있다면, 그것은 <code>(a, b)</code> 인수들에 대해 사용될 수 없습니다. 예를 들어, 인수가 <code>(3, 2)</code>와 <code>(2, 3)</code>일 경우, 두 번의 별도 호출이 이루어져야 합니다.</li>
+	<li><code>fib</code><strong> </strong>는 한 개의 정수 <code>n</code>을 받아서 <code>n &lt;= 1</code>이면 <code>1</code>을 반환하고, 그렇지 않으면 <code>fib(n - 1) + fib(n - 2)</code>를 반환합니다.</li>
+	<li><code>factorial</code>은 한 개의 정수 <code>n</code>을 받아서 <code>n &lt;= 1</code>이면 <code>1</code>을 반환하고, 그렇지 않으면 <code>factorial(n - 1) * n</code>을 반환합니다.</li>
 </ul>
 
 <p>&nbsp;</p>

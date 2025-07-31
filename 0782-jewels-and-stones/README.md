@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/jewels-and-stones">782. 보석과 돌</a></h2><h3>쉬움</h3><hr><p>당신은 보석의 종류를 나타내는 문자열 <code>jewels</code>와 당신이 가진 돌을 나타내는 문자열 <code>stones</code>을 받습니다. <code>stones</code>의 각 문자는 당신이 가진 돌의 유형입니다. 당신은 가진 돌 중에서 몇 개가 보석인지 알고 싶습니다.</p>
+<h2><a href="https://leetcode.com/problems/jewels-and-stones">782. Jewels and Stones</a></h2><h3>Easy</h3><hr><p>당신은 보석의 종류를 나타내는 문자열 <code>jewels</code>와 당신이 가진 돌을 나타내는 문자열 <code>stones</code>을 받습니다. <code>stones</code>의 각 문자는 당신이 가진 돌의 유형입니다. 당신은 가진 돌 중에서 몇 개가 보석인지 알고 싶습니다.</p>
 
 <p>문자는 대소문자를 구분하므로 <code>&quot;a&quot;</code>는 <code>&quot;A&quot;</code>와 다른 유형의 돌로 간주됩니다.</p>
 

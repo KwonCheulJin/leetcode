@@ -68,40 +68,45 @@ async function shouldRetranslate(readmePath: string, enReadmePath: string, force
     return true;
   }
 
-  const metaPath = `${readmePath}.meta.json`;
-  
   try {
-    // 현재 README.md 해시 계산
-    const currentContent = await fs.readFile(readmePath, 'utf8');
-    const currentHash = crypto.createHash('sha256').update(currentContent).digest('hex');
-    
-    // 메타데이터 읽기
-    let meta: TranslationMeta;
-    try {
-      const metaContent = await fs.readFile(metaPath, 'utf8');
-      meta = JSON.parse(metaContent);
-    } catch {
-      // 메타데이터가 없으면 번역 필요
-      console.log('📝 메타데이터가 없습니다. 번역이 필요합니다.');
-      return true;
-    }
-    
     // README.en.md 존재 여부 확인
     const hasEnReadme = await doesFileExist(enReadmePath);
     if (!hasEnReadme) {
       console.log('📄 README.en.md가 없습니다. 번역이 필요합니다.');
       return true;
     }
+
+    // 파일 수정 시간 비교
+    const readmeStats = await fs.stat(readmePath);
+    const enReadmeStats = await fs.stat(enReadmePath);
     
-    // 해시 비교
-    const needsUpdate = currentHash !== meta.sourceHash;
-    if (needsUpdate) {
-      console.log('🔍 콘텐츠가 변경되었습니다. 재번역이 필요합니다.');
-    } else {
-      console.log('✨ 변경사항이 없습니다. 번역을 건너뜁니다.');
+    // README.md가 README.en.md보다 최근에 수정되었으면 재번역 필요
+    if (readmeStats.mtime > enReadmeStats.mtime) {
+      console.log('📅 README.md가 번역 이후 수정되었습니다. 재번역이 필요합니다.');
+      return true;
+    }
+
+    // 메타데이터가 있으면 해시 비교도 수행 (로컬 개발용)
+    const metaPath = `${readmePath}.meta.json`;
+    try {
+      const metaContent = await fs.readFile(metaPath, 'utf8');
+      const meta: TranslationMeta = JSON.parse(metaContent);
+      
+      const currentContent = await fs.readFile(readmePath, 'utf8');
+      const currentHash = crypto.createHash('sha256').update(currentContent).digest('hex');
+      
+      const needsUpdate = currentHash !== meta.sourceHash;
+      if (needsUpdate) {
+        console.log('🔍 내용 해시가 변경되었습니다. 재번역이 필요합니다.');
+        return true;
+      }
+    } catch {
+      // 메타데이터 없음은 정상 (GitHub Actions 환경)
     }
     
-    return needsUpdate;
+    console.log('✨ 변경사항이 없습니다. 번역을 건너뜁니다.');
+    return false;
+    
   } catch (error) {
     console.warn('⚠️ 번역 상태 확인 중 오류:', error);
     return true; // 오류 시 번역 진행

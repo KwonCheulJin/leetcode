@@ -44,3 +44,6 @@ temp/
 
 # Translation metadata
 *.meta.json
+
+# Test environments
+test-translation-env/

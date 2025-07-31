@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/counter">2620. Counter</a></h2><h3>쉬움</h3><hr><p>정수 <code>n</code>이 주어졌을 때, <code>counter</code> 함수를 반환하세요. 이 <code>counter</code> 함수는 처음에는 <code>n</code>을 반환하고, 그 후 호출될 때마다 이전 값보다 1 더 많은 값을 반환합니다 (<code>n</code>, <code>n + 1</code>, <code>n + 2</code> 등).</p>
+<h2><a href="https://leetcode.com/problems/counter">2620. 카운터</a></h2><h3>쉬움</h3><hr><p>정수 <code>n</code>이 주어졌을 때, <code>counter</code> 함수를 반환하세요. 이 <code>counter</code> 함수는 처음에는 <code>n</code>을 반환하고, 그 후 호출될 때마다 이전 값보다 1 더 많은 값을 반환합니다 (<code>n</code>, <code>n + 1</code>, <code>n + 2</code> 등).</p>
 
 <p>&nbsp;</p>
 <p><strong class="example">예제 1:</strong></p>

@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/sort-the-students-by-their-kth-score">2545. 학생들을 해당하는 k번째 점수로 정렬하기</a></h2><h3>중간</h3><hr><p><code>m</code>명의 학생과 <code>n</code>개의 시험이 있는 반이 있습니다. <strong>0-인덱스</strong> <code>m x n</code> 정수 행렬 <code>score</code>가 주어졌으며, 각 행은 한 학생을 나타내고 <code>score[i][j]</code>는 <code>i<sup>th</sup></code> 학생이 <code>j<sup>th</sup></code> 시험에서 받은 점수를 나타냅니다. 행렬 <code>score</code>는 <strong>서로 다른</strong> 정수만 포함합니다.</p>
+<h2><a href="https://leetcode.com/problems/sort-the-students-by-their-kth-score">2545. 학생들을 k번째 점수로 정렬하기</a></h2><h3>중간</h3><hr><p><code>m</code>명의 학생과 <code>n</code>개의 시험이 있는 반이 있습니다. <strong>0-인덱스</strong> <code>m x n</code> 정수 행렬 <code>score</code>가 주어졌으며, 각 행은 한 학생을 나타내고 <code>score[i][j]</code>는 <code>i<sup>th</sup></code> 학생이 <code>j<sup>th</sup></code> 시험에서 받은 점수를 나타냅니다. 행렬 <code>score</code>는 <strong>서로 다른</strong> 정수만 포함합니다.</p>
 
 <p>또한 정수 <code>k</code>가 주어집니다. <code>k<sup>th</sup></code> (<strong>0-인덱스</strong>) 시험에서의 점수를 기준으로 학생들(즉, 행렬의 행들)을 높은 점수에서 낮은 점수 순으로 정렬하십시오.</p>
 

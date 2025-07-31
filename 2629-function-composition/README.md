@@ -1,10 +1,10 @@
-<h2><a href="https://leetcode.com/problems/function-composition">2629. 함수 합성</a></h2><h3>쉬움</h3><hr><p>함수 배열&nbsp;<code>[f<span style="font-size: 10.8333px;">1</span>, f<sub>2</sub>, f<sub>3</sub>,&nbsp;..., f<sub>n</sub>]</code>이 주어지면, 이 함수 배열의 <strong>함수 합성</strong>인 새로운 함수&nbsp;<code>fn</code>을 반환하세요.</p>
+<h2><a href="https://leetcode.com/problems/function-composition">2629. 함수 합성</a></h2><h3>쉬움</h3><hr><p>함수 배열 <code>[f<span style="font-size: 10.8333px;">1</span>, f<sub>2</sub>, f<sub>3</sub>, ..., f<sub>n</sub>]</code>이 주어지면, 이 함수 배열의 <strong>함수 합성</strong>인 새로운 함수 <code>fn</code>을 반환하세요.</p>
 
-<p><code>[f(x), g(x), h(x)]</code>의&nbsp;<strong>함수 합성</strong>은&nbsp;<code>fn(x) = f(g(h(x)))</code>입니다.</p>
+<p><code>[f(x), g(x), h(x)]</code>의 <strong>함수 합성</strong>은 <code>fn(x) = f(g(h(x)))</code>입니다.</p>
 
-<p>함수 목록이 비어 있을 때의 <strong>함수 합성</strong>은&nbsp;<strong>항등 함수</strong>&nbsp;<code>f(x) = x</code>입니다.</p>
+<p>함수 목록이 비어 있을 때의 <strong>함수 합성</strong>은 <strong>항등 함수</strong> <code>f(x) = x</code>입니다.</p>
 
-<p>배열의 각&nbsp;함수는 하나의 정수를 입력으로 받고 하나의 정수를 출력으로 반환한다고 가정할 수 있습니다.</p>
+<p>배열의 각 함수는 하나의 정수를 입력으로 받고 하나의 정수를 출력으로 반환한다고 가정할 수 있습니다.</p>
 
 <p>&nbsp;</p>
 <p><strong class="example">예제 1:</strong></p>

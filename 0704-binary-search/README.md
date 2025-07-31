@@ -1,6 +1,6 @@
-<h2><a href="https://leetcode.com/problems/binary-search">704. 이진 검색</a></h2><h3>쉬움</h3><hr><p>오름차순으로 정렬된 정수 배열 <code>nums</code>와 정수 <code>target</code>이 주어질 때, <code>nums</code>에서 <code>target</code>을 검색하는 함수를 작성하세요. <code>target</code>이 존재하면 인덱스를 반환하고, 그렇지 않으면 <code>-1</code>을 반환하세요.</p>
+<h2><a href="https://leetcode.com/problems/binary-search">704. 이진 검색</a></h2><h3>쉬움</h3><hr><p>오름차순으로 정렬된 정수 배열 <code>nums</code>와 정수 <code>target</code>이 주어졌을 때, <code>nums</code>에서 <code>target</code>을 검색하는 함수를 작성하세요. <code>target</code>이 존재하면 해당 인덱스를 반환하고, 그렇지 않으면 <code>-1</code>을 반환하세요.</p>
 
-<p>이 알고리즘은 <code>O(log n)</code> 실행 시간 복잡도로 작성해야 합니다.</p>
+<p>알고리즘은 <code>O(log n)</code> 실행 시간 복잡도로 작성해야 합니다.</p>
 
 <p>&nbsp;</p>
 <p><strong class="example">예제 1:</strong></p>

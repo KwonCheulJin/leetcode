@@ -6,6 +6,7 @@
 ## Array
 |  |
 | ------- |
+| [0053-maximum-subarray](https://github.com/KwonCheulJin/leetcode/tree/master/0053-maximum-subarray) |
 | [0217-contains-duplicate](https://github.com/KwonCheulJin/leetcode/tree/master/0217-contains-duplicate) |
 ## Hash Table
 |  |
@@ -26,4 +27,12 @@
 |  |
 | ------- |
 | [0020-valid-parentheses](https://github.com/KwonCheulJin/leetcode/tree/master/0020-valid-parentheses) |
+## Divide and Conquer
+|  |
+| ------- |
+| [0053-maximum-subarray](https://github.com/KwonCheulJin/leetcode/tree/master/0053-maximum-subarray) |
+## Dynamic Programming
+|  |
+| ------- |
+| [0053-maximum-subarray](https://github.com/KwonCheulJin/leetcode/tree/master/0053-maximum-subarray) |
 <!---LeetCode Topics End-->

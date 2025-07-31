@@ -17,13 +17,13 @@
 <pre>
 <strong>입력:</strong> nums = [-1,-100,3,99], k = 2
 <strong>출력:</strong> [3,99,-1,-100]
-<strong>설명:</strong> 
+<strong>설명:</strong>
 오른쪽으로 1번 회전: [99,-1,-100,3]
 오른쪽으로 2번 회전: [3,99,-1,-100]
 </pre>
 
 <p>&nbsp;</p>
-<p><strong>제약 조건:</strong></p>
+<p><strong>제약 사항:</strong></p>
 
 <ul>
 	<li><code>1 &lt;= nums.length &lt;= 10<sup>5</sup></code></li>

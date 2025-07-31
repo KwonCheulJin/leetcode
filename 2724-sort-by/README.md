@@ -16,7 +16,7 @@
 <pre>
 <strong>입력:</strong> arr = [{"x": 1}, {"x": 0}, {"x": -1}], fn = (d) =&gt; d.x
 <strong>출력:</strong> [{"x": -1}, {"x": 0}, {"x": 1}]
-<strong>설명:</strong> fn은 "x" 키의 값을 반환합니다. 따라서 배열은 그 값에 따라 정렬됩니다.
+<strong>설명:</strong> fn은 "x" 키에 대한 값을 반환합니다. 따라서 배열은 해당 값에 따라 정렬됩니다.
 </pre>
 
 <p><strong class="example">예제 3:</strong></p>

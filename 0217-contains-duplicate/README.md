@@ -34,7 +34,7 @@
 </div>
 
 <p>&nbsp;</p>
-<p><strong>제약 사항:</strong></p>
+<p><strong>제약 조건:</strong></p>
 
 <ul>
 	<li><code>1 &lt;= nums.length &lt;= 10<sup>5</sup></code></li>

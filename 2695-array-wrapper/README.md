@@ -6,7 +6,7 @@
 </ul>
 
 <p>&nbsp;</p>
-<p><strong class="example">예제 1:</strong></p>
+<p><strong class="example">예시 1:</strong></p>
 
 <pre>
 <strong>입력:</strong> nums = [[1,2],[3,4]], operation = "Add"
@@ -17,7 +17,7 @@ const obj2 = new ArrayWrapper([3,4]);
 obj1 + obj2; // 10
 </pre>
 
-<p><strong class="example">예제 2:</strong></p>
+<p><strong class="example">예시 2:</strong></p>
 
 <pre>
 <strong>입력:</strong> nums = [[23,98,42,70]], operation = "String"
@@ -27,7 +27,7 @@ const obj = new ArrayWrapper([23,98,42,70]);
 String(obj); // "[23,98,42,70]"
 </pre>
 
-<p><strong class="example">예제 3:</strong></p>
+<p><strong class="example">예시 3:</strong></p>
 
 <pre>
 <strong>입력:</strong> nums = [[],[]], operation = "Add"

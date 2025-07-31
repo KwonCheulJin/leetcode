@@ -26,7 +26,7 @@ M             1000</pre>
 <p><strong class="example">예제 1:</strong></p>
 
 <pre>
-<strong>입력:</strong> s = &quot;III&quot;
+<strong>입력:</strong> s = "III"
 <strong>출력:</strong> 3
 <strong>설명:</strong> III = 3.
 </pre>
@@ -34,17 +34,17 @@ M             1000</pre>
 <p><strong class="example">예제 2:</strong></p>
 
 <pre>
-<strong>입력:</strong> s = &quot;LVIII&quot;
+<strong>입력:</strong> s = "LVIII"
 <strong>출력:</strong> 58
-<strong>설명:</strong> L = 50, V= 5, III = 3.
+<strong>설명:</strong> L = 50, V = 5, III = 3.
 </pre>
 
 <p><strong class="example">예제 3:</strong></p>
 
 <pre>
-<strong>입력:</strong> s = &quot;MCMXCIV&quot;
+<strong>입력:</strong> s = "MCMXCIV"
 <strong>출력:</strong> 1994
-<strong>설명:</strong> M = 1000, CM = 900, XC = 90 그리고 IV = 4.
+<strong>설명:</strong> M = 1000, CM = 900, XC = 90, IV = 4.
 </pre>
 
 <p>&nbsp;</p>

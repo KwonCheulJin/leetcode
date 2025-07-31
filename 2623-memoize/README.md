@@ -1,6 +1,6 @@
 <h2><a href="https://leetcode.com/problems/memoize">2623. 메모이즈</a></h2><h3>중간 단계</h3><hr><p>함수 <code>fn</code>이 주어졌을 때, 그 함수의 <strong>메모이즈된</strong> 버전을 반환합니다.</p>
 
-<p><strong>메모이즈<sup></sup></strong> 함수란 같은 입력값으로 두 번 호출되지 않는 함수입니다. 대신에 캐시된 값을 반환합니다.</p>
+<p><strong>메모이즈</strong> 함수란 같은 입력값으로 두 번 호출되지 않는 함수입니다. 대신에 캐시된 값을 반환합니다.</p>
 
 <p>입력 함수는 <strong>3</strong>가지가 있을 수 있다고 가정합니다: <code>sum</code><strong>, </strong><code>fib</code><strong>, </strong>및 <code>factorial</code><strong>.</strong></p>
 

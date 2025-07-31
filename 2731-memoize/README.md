@@ -11,14 +11,14 @@
 </ul>
 
 <p>&nbsp;</p>
-<p><strong class="example">예시 1:</strong></p>
+<p><strong class="example">예제 1:</strong></p>
 
 <pre>
 <strong>입력:</strong>
 fnName = &quot;sum&quot;
 actions = [&quot;call&quot;,&quot;call&quot;,&quot;getCallCount&quot;,&quot;call&quot;,&quot;getCallCount&quot;]
 values = [[2,2],[2,2],[],[1,2],[]]
-<strong>출력:</strong> [4,4,1,3,2]
+<strong>출력:</strong> [4, 4, 1, 3, 2]
 <strong>설명:</strong>
 const sum = (a, b) =&gt; a + b;
 const memoizedSum = memoize(sum);
@@ -29,14 +29,14 @@ memoizedSum(1, 2); // &quot;call&quot; - 3을 반환합니다. (1, 2)가 이전�
 // &quot;getCallCount&quot; - 총 호출 횟수: 2
 </pre>
 
-<p><strong class="example">예시 2:</strong></p>
+<p><strong class="example">예제 2:</strong></p>
 
 <pre>
 <strong>입력:
 </strong>fnName = &quot;factorial&quot;
 actions = [&quot;call&quot;,&quot;call&quot;,&quot;call&quot;,&quot;getCallCount&quot;,&quot;call&quot;,&quot;getCallCount&quot;]
 values = [[2],[3],[2],[],[3],[]]
-<strong>출력:</strong> [2,6,2,2,6,2]
+<strong>출력:</strong> [2, 6, 2, 2, 6, 2]
 <strong>설명:</strong>
 const factorial = (n) =&gt; (n &lt;= 1) ? 1 : (n * factorial(n - 1));
 const memoFactorial = memoize(factorial);
@@ -48,7 +48,7 @@ memoFactorial(3); // &quot;call&quot; - 6을 반환합니다. 하지만 3이 이
 // &quot;getCallCount&quot; - 총 호출 횟수: 2
 </pre>
 
-<p><strong class="example">예시 3:</strong></p>
+<p><strong class="example">예제 3:</strong></p>
 
 <pre>
 <strong>입력:

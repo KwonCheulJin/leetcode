@@ -4,13 +4,22 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "translate": "node app/translateREADME.js",
+    "test": "echo \"No tests specified\" && exit 0",
+    "type-check": "tsc --noEmit",
+    "build": "tsc",
+    "translate": "tsx app/translateREADME.ts",
     "translate:changed": "git diff --name-only HEAD^ HEAD | xargs -I {} dirname {} | sort -u | xargs -I {} sh -c 'if [ -f \"{}/README.md\" ]; then npm run translate \"{}\" ; fi'"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^17.2.1",
     "openai": "^4.72.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.1.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
   }
 }

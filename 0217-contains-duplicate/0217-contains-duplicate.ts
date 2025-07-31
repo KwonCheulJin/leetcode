@@ -1,13 +1,10 @@
 function containsDuplicate(nums: number[]): boolean {
-    const memoNums = new Map()
+  const seen = new Set();
 
-    for (let i = 0; i < nums.length; i++) {
-        if (memoNums.has(nums[i])) {
-            return true
-        } else {
-            memoNums.set(nums[i], i)
-        }
-    }
+  for (const num of nums) {
+    if (seen.has(num)) return true;
+    seen.add(num);
+  }
 
-    return false
+  return false;
 };

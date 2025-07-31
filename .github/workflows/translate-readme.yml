@@ -21,7 +21,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # 전체 히스토리를 가져옴
+          fetch-depth: 2 # 최근 2개 커밋만 가져와서 충돌 가능성 최소화
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -38,7 +39,12 @@ jobs:
       - name: Find and translate README files
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: npm run translate
+        run: |
+          if [ -z "$OPENAI_API_KEY" ]; then
+            echo "⚠️ OPENAI_API_KEY is not set, skipping translation"
+            exit 0
+          fi
+          npm run translate
 
       - name: Commit changes
         run: |
@@ -52,17 +58,26 @@ jobs:
             exit 0
           fi
           
-          # 충돌 방지를 위한 pull과 rebase
-          git pull origin main --rebase || {
-            echo "Pull failed, attempting to resolve conflicts"
+          # 변경사항을 먼저 스테이징
+          git add .
+          
+          # 안전한 pull 전략 - 간단한 접근법
+          git fetch origin main
+          git merge origin/main || {
+            echo "Merge failed, trying to resolve automatically"
+            # 자동 번역 파일들은 충돌 시 remote 버전 우선
+            git checkout --theirs '*.md' || true
+            git checkout --theirs '*.json' || true
             git add .
-            git rebase --continue || git rebase --abort
-            git pull origin main
+            git commit --no-edit || true
           }
           
+          # 최종 커밋 및 푸시
           git add .
-          git diff --staged --quiet || git commit -m "Update Korean translations [automated] 
-          
-          - Translated README files using smart detection system
-          - Updated metadata for change tracking"
-          git push
+          if git diff --cached --quiet; then
+            echo "No staged changes to commit"
+          else
+            echo "Committing changes..."
+            git commit -m "Update Korean translations [automated]" || echo "Commit failed, but continuing..."
+            git push origin main || echo "Push failed, but workflow completed"
+          fi

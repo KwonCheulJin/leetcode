@@ -63,46 +63,51 @@ function isRootReadme(filePath: string, rootDir: string): boolean {
 }
 
 /**
- * 재번역이 필요한지 스마트 감지
+ * 재번역이 필요한지 스마트 감지 (Git 호환 방식)
  * @param readmePath - README.md 파일 경로
  * @param enReadmePath - README.en.md 파일 경로
  * @returns 재번역 필요 여부
  */
 async function shouldRetranslate(readmePath: string, enReadmePath: string): Promise<boolean> {
-  const metaPath = `${readmePath}.meta.json`;
-  
   try {
-    // 현재 README.md 해시 계산
-    const currentContent = await fs.readFile(readmePath, 'utf8');
-    const currentHash = crypto.createHash('sha256').update(currentContent).digest('hex');
-    
-    // 메타데이터 읽기
-    let meta: TranslationMeta;
-    try {
-      const metaContent = await fs.readFile(metaPath, 'utf8');
-      meta = JSON.parse(metaContent);
-    } catch {
-      // 메타데이터가 없으면 번역 필요
-      console.log(`No metadata found for ${readmePath}, translation needed`);
-      return true;
-    }
-    
     // README.en.md 존재 여부 확인
     const hasEnReadme = await doesFileExist(enReadmePath);
     if (!hasEnReadme) {
       console.log(`README.en.md missing for ${readmePath}, translation needed`);
       return true;
     }
+
+    // 파일 수정 시간 비교
+    const readmeStats = await fs.stat(readmePath);
+    const enReadmeStats = await fs.stat(enReadmePath);
     
-    // 해시 비교
-    const needsUpdate = currentHash !== meta.sourceHash;
-    if (needsUpdate) {
-      console.log(`Content changed for ${readmePath}, re-translation needed`);
-    } else {
-      console.log(`No changes detected for ${readmePath}, skipping translation`);
+    // README.md가 README.en.md보다 최근에 수정되었으면 재번역 필요
+    if (readmeStats.mtime > enReadmeStats.mtime) {
+      console.log(`README.md modified after translation for ${readmePath}, re-translation needed`);
+      return true;
+    }
+
+    // 메타데이터가 있으면 해시 비교도 수행 (로컬 개발용)
+    const metaPath = `${readmePath}.meta.json`;
+    try {
+      const metaContent = await fs.readFile(metaPath, 'utf8');
+      const meta: TranslationMeta = JSON.parse(metaContent);
+      
+      const currentContent = await fs.readFile(readmePath, 'utf8');
+      const currentHash = crypto.createHash('sha256').update(currentContent).digest('hex');
+      
+      const needsUpdate = currentHash !== meta.sourceHash;
+      if (needsUpdate) {
+        console.log(`Content hash changed for ${readmePath}, re-translation needed`);
+        return true;
+      }
+    } catch {
+      // 메타데이터 없음은 정상 (GitHub Actions 환경)
     }
     
-    return needsUpdate;
+    console.log(`No changes detected for ${readmePath}, skipping translation`);
+    return false;
+    
   } catch (error) {
     console.warn(`Error checking translation status for ${readmePath}:`, error);
     return true; // 오류 시 번역 진행

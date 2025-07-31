@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/function-composition">2629. 함수 합성</a></h2><h3>쉬움</h3><hr><p>함수 배열 <code>[f<span style="font-size: 10.8333px;">1</span>, f<sub>2</sub>, f<sub>3</sub>, ..., f<sub>n</sub>]</code>이 주어지면, 이 함수 배열의 <strong>함수 합성</strong>인 새로운 함수 <code>fn</code>을 반환하세요.</p>
+<h2><a href="https://leetcode.com/problems/function-composition">2629. 함수 합성</a></h2><h3>쉬움</h3><hr><p>함수 배열 <code>[f<sub>1</sub>, f<sub>2</sub>, f<sub>3</sub>, ..., f<sub>n</sub>]</code>이 주어지면, 이 함수 배열의 <strong>함수 합성</strong>인 새로운 함수 <code>fn</code>을 반환하세요.</p>
 
 <p><code>[f(x), g(x), h(x)]</code>의 <strong>함수 합성</strong>은 <code>fn(x) = f(g(h(x)))</code>입니다.</p>
 

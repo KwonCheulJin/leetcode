@@ -1,8 +1,8 @@
-<h2><a href="https://leetcode.com/problems/merge-sorted-array">88. Merge Sorted Array</a></h2><h3>Easy</h3><hr><p>You are given two integer arrays <code>nums1</code> and <code>nums2</code>, sorted in <strong>non-decreasing order</strong>, and two integers <code>m</code> and <code>n</code>, representing the number of elements in <code>nums1</code> and <code>nums2</code>, respectively.</p>
+<h2><a href="https://leetcode.com/problems/merge-sorted-array">88. Merge Sorted Array</a></h2><h3>Easy</h3><hr><p>Two integer arrays <code>nums1</code> and <code>nums2</code> are sorted in <strong>non-decreasing order</strong>, and <code>m</code> and <code>n</code> represent the number of elements in <code>nums1</code> and <code>nums2</code>, respectively.</p>
 
 <p><strong>Merge</strong> <code>nums1</code> and <code>nums2</code> into a single array sorted in non-decreasing order.</p>
 
-<p>The final sorted array should not be returned by the function, but instead be stored inside the array <code>nums1</code>. To accommodate this, <code>nums1</code> has a length of <code>m + n</code>, where the first <code>m</code> elements denote the elements that should be merged, and the last <code>n</code> elements are set to <code>0</code> and should be ignored. <code>nums2</code> has a length of <code>n</code>.</p>
+<p>The final sorted array should not be returned by the function, but instead be stored inside the array <code>nums1</code>. To accommodate this, <code>nums1</code> has a length of <code>m + n</code>, where the first <code>m</code> elements denote the elements to be merged, and the last <code>n</code> elements are set to <code>0</code> and should be ignored. <code>nums2</code> has a length of <code>n</code>.</p>
 
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
@@ -30,7 +30,7 @@ The result of the merge is [1].
 <strong>Output:</strong> [1]
 <strong>Explanation:</strong> The arrays we are merging are [] and [1].
 The result of the merge is [1].
-Note that because m = 0, there are no elements in nums1. The 0 is just there to ensure the merge result can fit in nums1.
+Note that because m = 0, there are no elements in nums1. The 0 is here to ensure the merge result can fit in nums1.
 </pre>
 
 <p>&nbsp;</p>
@@ -45,4 +45,4 @@ Note that because m = 0, there are no elements in nums1. The 0 is just there to 
 </ul>
 
 <p>&nbsp;</p>
-<p><strong>Follow up: </strong>Can you come up with an algorithm that runs in <code>O(m + n)</code> time?</p>
+<p><strong>Follow up:</strong> Can you come up with an algorithm that runs in <code>O(m + n)</code> time?</p>

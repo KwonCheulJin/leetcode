@@ -41,3 +41,6 @@ yarn-error.log*
 *~
 tmp/
 temp/
+
+# Translation metadata
+*.meta.json

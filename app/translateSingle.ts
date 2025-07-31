@@ -226,6 +226,12 @@ async function main(): Promise<void> {
   const filePath = args[0];
   const force = args.includes('--force');
   
+  // filePath 타입 가드 추가
+  if (!filePath) {
+    console.error('❌ 파일 경로가 제공되지 않았습니다.');
+    process.exit(1);
+  }
+  
   console.log('🚀 개별 파일 번역 시작');
   console.log(`📂 대상 파일: ${filePath}`);
   if (force) console.log('🔥 강제 번역 모드 활성화');

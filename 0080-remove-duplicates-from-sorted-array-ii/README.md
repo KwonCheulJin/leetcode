@@ -17,7 +17,7 @@ int[] expectedNums = [...]; // 올바른 길이를 가진 예상 답안
 int k = removeDuplicates(nums); // 당신의 구현을 호출합니다
 
 assert k == expectedNums.length;
-for (int i = 0; i &lt; k; i++) {
+for (int i = 0; i < k; i++) {
     assert nums[i] == expectedNums[i];
 }
 </pre>
@@ -47,7 +47,7 @@ for (int i = 0; i &lt; k; i++) {
 <p><strong>제약 조건:</strong></p>
 
 <ul>
-	<li><code>1 &lt;= nums.length &lt;= 3 * 10<sup>4</sup></code></li>
-	<li><code>-10<sup>4</sup> &lt;= nums[i] &lt;= 10<sup>4</sup></code></li>
+	<li><code>1 <= nums.length <= 3 * 10<sup>4</sup></code></li>
+	<li><code>-10<sup>4</sup> <= nums[i] <= 10<sup>4</sup></code></li>
 	<li><code>nums</code>는 <strong>비내림차순</strong>으로 정렬되어 있습니다.</li>
 </ul>

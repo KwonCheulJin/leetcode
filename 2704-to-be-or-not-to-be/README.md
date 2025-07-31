@@ -6,7 +6,7 @@
 </ul>
 
 <p>&nbsp;</p>
-<p><strong class="example">예제 1:</strong></p>
+<p><strong class="예제">예제 1:</strong></p>
 
 <pre>
 <strong>입력:</strong> func = () =&gt; expect(5).toBe(5)
@@ -14,7 +14,7 @@
 <strong>설명:</strong> 5 === 5이므로 이 표현식은 true를 반환합니다.
 </pre>
 
-<p><strong class="example">예제 2:</strong></p>
+<p><strong class="예제">예제 2:</strong></p>
 
 <pre>
 <strong>입력:</strong> func = () =&gt; expect(5).toBe(null)
@@ -22,7 +22,7 @@
 <strong>설명:</strong> 5 !== null이므로 이 표현식은 "Not Equal" 오류를 발생시킵니다.
 </pre>
 
-<p><strong class="example">예제 3:</strong></p>
+<p><strong class="예제">예제 3:</strong></p>
 
 <pre>
 <strong>입력:</strong> func = () =&gt; expect(5).notToBe(null)

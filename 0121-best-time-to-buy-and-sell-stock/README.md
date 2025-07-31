@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock">121. 주식을 사고 팔기 가장 좋은 시점</a></h2><h3>쉬움</h3><hr><p>배열 <code>prices</code>가 주어집니다. 여기서 <code>prices[i]</code>는 <code>i<sup>th</sup></code>일의 주식 가격입니다.</p>
+<h2><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock">121. 주식을 사고 팔기 가장 좋은 시점</a></h2><h3>쉬움</h3><hr><p>배열 <code>prices</code>가 주어집니다. 여기서 <code>prices[i]</code>는 <code>i<sup>번째</sup></code> 날의 주식 가격입니다.</p>
 
 <p>한 주식을 사기 위해 <strong>단 하루</strong>를 선택하고, 그 주식을 팔기 위해 <strong>미래의 다른 날</strong>을 선택하여 이익을 최대화하고 싶습니다.</p>
 

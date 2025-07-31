@@ -14,7 +14,7 @@
     "translate": "tsx app/translateREADME.ts",
     "translate:file": "tsx app/translateSingle.ts",
     "translate:force": "tsx app/translateSingle.ts -- --force",
-    "translate:changed": "git diff --name-only HEAD^ HEAD | xargs -I {} dirname {} | sort -u | xargs -I {} sh -c 'if [ -f \"{}/README.md\" ]; then npm run translate \"{}\" ; fi'"
+    "translate:changed": "tsx app/translateChanged.ts"
   },
   "keywords": [],
   "author": "",

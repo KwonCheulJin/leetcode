@@ -43,15 +43,25 @@ jobs:
           echo "Commit message: $COMMIT_MSG"
           
           # LeetHub 커밋인지 확인 (LeetHub 특징적인 패턴 검사)
-          if echo "$COMMIT_MSG" | grep -qE "(Create README - LeetHub|Time:|Space:|LeetHub)"; then
+          if echo "$COMMIT_MSG" | grep -qE "(Create README - LeetHub|Time:|Space:|LeetHub|^[0-9]+\.|^\[[0-9]+\])"; then
             echo "is_leetcode=true" >> $GITHUB_OUTPUT
             echo "✅ LeetHub commit detected, will run translation"
+            
+            # 변경된 파일들도 확인
+            echo "📋 Changed files in this commit:"
+            git diff --name-only HEAD~1 HEAD | grep -E "README\.md$" || echo "No README.md files changed"
           else
             echo "is_leetcode=false" >> $GITHUB_OUTPUT
             echo "❌ Not a LeetHub commit, skipping translation"
+            echo "📋 Commit message patterns checked:"
+            echo "  - Create README - LeetHub"
+            echo "  - Time:"
+            echo "  - Space:"
+            echo "  - LeetHub"
+            echo "  - Problem number patterns (e.g., '1.', '[1]')"
           fi
 
-      - name: Find and translate README files
+      - name: Find and translate changed README files
         if: steps.check_commit.outputs.is_leetcode == 'true'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -60,7 +70,9 @@ jobs:
             echo "⚠️ OPENAI_API_KEY is not set, skipping translation"
             exit 0
           fi
-          npm run translate
+          
+          # 변경된 파일만 번역 (더 효율적)
+          npm run translate:changed
 
       - name: Commit changes
         if: steps.check_commit.outputs.is_leetcode == 'true'

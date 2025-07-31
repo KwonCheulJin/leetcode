@@ -6,25 +6,25 @@
 <p><strong class="example">예제 1:</strong></p>
 
 <div class="example-block">
-<p><strong>입력:</strong> <span class="example-io">s = "hello"</span></p>
+<p><strong>입력:</strong> <span class="example-io">s = &quot;hello&quot;</span></p>
 
 <p><strong>출력:</strong> <span class="example-io">13</span></p>
 
 <p><strong>설명:</strong></p>
 
-<p><code>s</code> 에 있는 문자의 <strong>ASCII</strong> 값은: <code>'h' = 104</code>, <code>'e' = 101</code>, <code>'l' = 108</code>, <code>'o' = 111</code>. 따라서, <code>s</code> 의 점수는 <code>|104 - 101| + |101 - 108| + |108 - 108| + |108 - 111| = 3 + 7 + 0 + 3 = 13</code> 입니다.</p>
+<p><code>s</code> 에 있는 문자의 <strong>ASCII</strong> 값은: <code>&#39;h&#39; = 104</code>, <code>&#39;e&#39; = 101</code>, <code>&#39;l&#39; = 108</code>, <code>&#39;o&#39; = 111</code>. 따라서, <code>s</code> 의 점수는 <code>|104 - 101| + |101 - 108| + |108 - 108| + |108 - 111| = 3 + 7 + 0 + 3 = 13</code> 입니다.</p>
 </div>
 
 <p><strong class="example">예제 2:</strong></p>
 
 <div class="example-block">
-<p><strong>입력:</strong> <span class="example-io">s = "zaz"</span></p>
+<p><strong>입력:</strong> <span class="example-io">s = &quot;zaz&quot;</span></p>
 
 <p><strong>출력:</strong> <span class="example-io">50</span></p>
 
 <p><strong>설명:</strong></p>
 
-<p><code>s</code> 에 있는 문자의 <strong>ASCII</strong> 값은: <code>'z' = 122</code>, <code>'a' = 97</code>. 따라서, <code>s</code> 의 점수는 <code>|122 - 97| + |97 - 122| = 25 + 25 = 50</code> 입니다.</p>
+<p><code>s</code> 에 있는 문자의 <strong>ASCII</strong> 값은: <code>&#39;z&#39; = 122</code>, <code>&#39;a&#39; = 97</code>. 따라서, <code>s</code> 의 점수는 <code>|122 - 97| + |97 - 122| = 25 + 25 = 50</code> 입니다.</p>
 </div>
 
 <p>&nbsp;</p>

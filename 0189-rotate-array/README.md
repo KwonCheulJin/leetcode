@@ -1,25 +1,25 @@
-<h2><a href="https://leetcode.com/problems/rotate-array">189. 배열 회전</a></h2><h3>중간</h3><hr><p>정수 배열 <code>nums</code>가 주어졌을 때, 배열을 오른쪽으로 <code>k</code> 단계 회전시키세요. 여기서 <code>k</code>는 음수가 아닙니다.</p>
+<h2><a href="https://leetcode.com/problems/rotate-array">189. 회전 배열</a></h2><h3>보통</h3><hr><p>정수 배열 <code>nums</code>가 주어졌을 때, <code>k</code>가 음수가 아닌 정수일 때 배열을 오른쪽으로 <code>k</code>번 회전시켜라.</p>
 
 <p>&nbsp;</p>
-<p><strong class="example">예제 1:</strong></p>
+<p><strong class="example">예시 1:</strong></p>
 
 <pre>
 <strong>입력:</strong> nums = [1,2,3,4,5,6,7], k = 3
 <strong>출력:</strong> [5,6,7,1,2,3,4]
 <strong>설명:</strong>
-오른쪽으로 1단계 회전: [7,1,2,3,4,5,6]
-오른쪽으로 2단계 회전: [6,7,1,2,3,4,5]
-오른쪽으로 3단계 회전: [5,6,7,1,2,3,4]
+오른쪽으로 1번 회전: [7,1,2,3,4,5,6]
+오른쪽으로 2번 회전: [6,7,1,2,3,4,5]
+오른쪽으로 3번 회전: [5,6,7,1,2,3,4]
 </pre>
 
-<p><strong class="example">예제 2:</strong></p>
+<p><strong class="example">예시 2:</strong></p>
 
 <pre>
 <strong>입력:</strong> nums = [-1,-100,3,99], k = 2
 <strong>출력:</strong> [3,99,-1,-100]
 <strong>설명:</strong> 
-오른쪽으로 1단계 회전: [99,-1,-100,3]
-오른쪽으로 2단계 회전: [3,99,-1,-100]
+오른쪽으로 1번 회전: [99,-1,-100,3]
+오른쪽으로 2번 회전: [3,99,-1,-100]
 </pre>
 
 <p>&nbsp;</p>
@@ -32,9 +32,9 @@
 </ul>
 
 <p>&nbsp;</p>
-<p><strong>후속 문제:</strong></p>
+<p><strong>추가 과제:</strong></p>
 
 <ul>
-	<li>이 문제를 해결할 수 있는 여러 가지 방법을 생각하세요. 최소한 <strong>세 가지</strong> 다른 방법이 있습니다.</li>
-	<li><code>O(1)</code> 추가 공간으로 제자리에서 해결할 수 있습니까?</li>
+	<li>이 문제를 풀 수 있는 방법을 최대한 많이 생각해 보세요. 최소한 <strong>세 가지</strong> 다른 방법이 있습니다.</li>
+	<li><code>O(1)</code>의 추가 공간으로 제자리에서 해결할 수 있습니까?</li>
 </ul>

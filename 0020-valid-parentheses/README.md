@@ -12,7 +12,7 @@
 <p><strong class="example">예시 1:</strong></p>
 
 <div class="example-block">
-<p><strong>입력:</strong> <span class="example-io">s = "()"</span></p>
+<p><strong>입력:</strong> <span class="example-io">s = "()" </span></p>
 
 <p><strong>출력:</strong> <span class="example-io">true</span></p>
 </div>

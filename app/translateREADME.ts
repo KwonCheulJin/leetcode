@@ -73,36 +73,37 @@ async function shouldRetranslate(readmePath: string, enReadmePath: string): Prom
     // README.en.md 존재 여부 확인
     const hasEnReadme = await doesFileExist(enReadmePath);
     if (!hasEnReadme) {
-      console.log(`README.en.md missing for ${readmePath}, translation needed`);
-      return true;
+      // README.md 내용이 영어인지 확인
+      const readmeContent = await fs.readFile(readmePath, 'utf8');
+      if (isEnglishContent(readmeContent)) {
+        console.log(`README.en.md missing for ${readmePath}, translation needed`);
+        return true;
+      } else {
+        console.log(`README.md already in Korean for ${readmePath}, but no English source found, skipping`);
+        return false;
+      }
     }
 
-    // 파일 수정 시간 비교
-    const readmeStats = await fs.stat(readmePath);
-    const enReadmeStats = await fs.stat(enReadmePath);
-    
-    // README.md가 README.en.md보다 최근에 수정되었으면 재번역 필요
-    if (readmeStats.mtime > enReadmeStats.mtime) {
-      console.log(`README.md modified after translation for ${readmePath}, re-translation needed`);
-      return true;
-    }
-
-    // 메타데이터가 있으면 해시 비교도 수행 (로컬 개발용)
+    // README.en.md가 있는 경우, 영어 원본을 기준으로 번역해야 함
     const metaPath = `${readmePath}.meta.json`;
+    
+    // 메타데이터 확인으로 영어 원본이 변경되었는지 확인
     try {
       const metaContent = await fs.readFile(metaPath, 'utf8');
       const meta: TranslationMeta = JSON.parse(metaContent);
       
-      const currentContent = await fs.readFile(readmePath, 'utf8');
-      const currentHash = crypto.createHash('sha256').update(currentContent).digest('hex');
+      const currentEnContent = await fs.readFile(enReadmePath, 'utf8');
+      const currentEnHash = crypto.createHash('sha256').update(currentEnContent).digest('hex');
       
-      const needsUpdate = currentHash !== meta.sourceHash;
+      const needsUpdate = currentEnHash !== meta.sourceHash;
       if (needsUpdate) {
-        console.log(`Content hash changed for ${readmePath}, re-translation needed`);
+        console.log(`English source changed for ${readmePath}, re-translation needed`);
         return true;
       }
     } catch {
-      // 메타데이터 없음은 정상 (GitHub Actions 환경)
+      // 메타데이터 없으면 영어 원본을 기준으로 번역 진행
+      console.log(`No metadata found for ${readmePath}, translation needed`);
+      return true;
     }
     
     console.log(`No changes detected for ${readmePath}, skipping translation`);
@@ -176,6 +177,17 @@ async function findReadmeFiles(dir: string, rootDir: string = dir): Promise<stri
 }
 
 /**
+ * 텍스트가 영어 내용인지 확인합니다.
+ * @param content - 확인할 텍스트 내용
+ * @returns 영어 내용 여부
+ */
+function isEnglishContent(content: string): boolean {
+  // 한국어 문자가 있으면 영어가 아님
+  const koreanRegex = /[가-힣]/;
+  return !koreanRegex.test(content);
+}
+
+/**
  * README 파일을 처리합니다.
  * @param file - 처리할 README 파일 경로
  */
@@ -185,19 +197,43 @@ async function processReadme(file: string): Promise<void> {
 
   try {
     console.log(`Translating ${file}`);
-    // 파일 내용을 한 번만 읽어서 재사용
-    const originalContent = await fs.readFile(file, 'utf8');
-    const translatedContent = await translateText(originalContent);
+    
+    // README.en.md가 있는지 확인
+    const hasEnReadme = await doesFileExist(enReadmePath);
+    
+    let sourceContent: string;
+    
+    if (hasEnReadme) {
+      // README.en.md가 있으면 이를 영어 원본으로 사용
+      sourceContent = await fs.readFile(enReadmePath, 'utf8');
+      console.log(`Using existing README.en.md as source for ${file}`);
+    } else {
+      // README.en.md가 없으면 현재 README.md 확인
+      const currentContent = await fs.readFile(file, 'utf8');
+      
+      if (isEnglishContent(currentContent)) {
+        // 현재 README.md가 영어면 이를 소스로 사용하고 백업
+        sourceContent = currentContent;
+        await fs.writeFile(enReadmePath, currentContent);
+        console.log(`Backed up English README.md to README.en.md for ${file}`);
+      } else {
+        // 이미 한국어면 번역할 필요 없음
+        console.log(`README.md already in Korean for ${file}, skipping translation`);
+        return;
+      }
+    }
+    
+    // 영어 소스를 한국어로 번역
+    const translatedContent = await translateText(sourceContent);
     
     if (!translatedContent) {
       throw new Error('Translation failed');
     }
     
-    // 원본과 번역본을 병렬로 저장
+    // 번역된 내용을 README.md에 저장하고 메타데이터 저장
     await Promise.all([
-      fs.writeFile(enReadmePath, originalContent), // 기존 README.md를 README.en.md로 저장
       fs.writeFile(file, translatedContent), // 번역된 내용을 README.md로 저장
-      saveTranslationMeta(file, originalContent, translatedContent) // 메타데이터 저장
+      saveTranslationMeta(file, sourceContent, translatedContent) // 메타데이터 저장 (영어 원본 기준)
     ]);
     console.log(`Translation completed for ${file}`);
   } catch (error) {

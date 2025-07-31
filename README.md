@@ -20,5 +20,10 @@
 ## String
 |  |
 | ------- |
+| [0020-valid-parentheses](https://github.com/KwonCheulJin/leetcode/tree/master/0020-valid-parentheses) |
 | [0242-valid-anagram](https://github.com/KwonCheulJin/leetcode/tree/master/0242-valid-anagram) |
+## Stack
+|  |
+| ------- |
+| [0020-valid-parentheses](https://github.com/KwonCheulJin/leetcode/tree/master/0020-valid-parentheses) |
 <!---LeetCode Topics End-->

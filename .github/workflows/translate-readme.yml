@@ -8,7 +8,7 @@ on:
     branches:
       - main
     paths:
-      - '**/README.md'
+      - '[0-9][0-9][0-9][0-9]-*/README.md'  # LeetCode 문제 패턴만 (예: 0001-two-sum/README.md)
       - 'app/**/*.ts'
       - 'tsconfig.json'
       - 'package.json'
@@ -36,7 +36,23 @@ jobs:
       - name: Type check TypeScript files
         run: npm run type-check
 
+      - name: Check if this is a LeetHub commit
+        id: check_commit
+        run: |
+          COMMIT_MSG=$(git log -1 --pretty=%B)
+          echo "Commit message: $COMMIT_MSG"
+          
+          # LeetHub 커밋인지 확인 (LeetHub 특징적인 패턴 검사)
+          if echo "$COMMIT_MSG" | grep -qE "(Create README - LeetHub|Time:|Space:|LeetHub)"; then
+            echo "is_leetcode=true" >> $GITHUB_OUTPUT
+            echo "✅ LeetHub commit detected, will run translation"
+          else
+            echo "is_leetcode=false" >> $GITHUB_OUTPUT
+            echo "❌ Not a LeetHub commit, skipping translation"
+          fi
+
       - name: Find and translate README files
+        if: steps.check_commit.outputs.is_leetcode == 'true'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
@@ -47,6 +63,7 @@ jobs:
           npm run translate
 
       - name: Commit changes
+        if: steps.check_commit.outputs.is_leetcode == 'true'
         run: |
           git config --local user.email "${{ github.actor }}@users.noreply.github.com"
           git config --local user.name "${{ github.actor }}"

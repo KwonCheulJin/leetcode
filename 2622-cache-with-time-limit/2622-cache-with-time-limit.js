@@ -1,24 +1,21 @@
 class TimeLimitedCache {
-  private cache: Map<number, { value: number; expire: number }>;
-
   constructor() {
     this.cache = new Map();
   }
 
-  set(key: number, value: number, duration: number): boolean {
+  set(key, value, duration) {
     const now = Date.now();
-    const isExistingAndUnexpired =
-      this.cache.has(key) && this.cache.get(key)!.expire > now;
+    const exists = this.cache.has(key) && this.cache.get(key).expire > now;
 
     this.cache.set(key, {
       value,
       expire: now + duration,
     });
 
-    return !!isExistingAndUnexpired;
+    return exists;
   }
 
-  get(key: number): number {
+  get(key) {
     const now = Date.now();
     const entry = this.cache.get(key);
 
@@ -29,18 +26,18 @@ class TimeLimitedCache {
     return entry.value;
   }
 
-  count(): number {
+  count() {
     const now = Date.now();
-    let validCount = 0;
+    let count = 0;
 
     for (const [key, { expire }] of this.cache.entries()) {
       if (expire > now) {
-        validCount++;
+        count++;
       } else {
-        this.cache.delete(key); // 만료된 키는 정리
+        this.cache.delete(key); // 만료된 항목은 정리
       }
     }
 
-    return validCount;
+    return count;
   }
 }

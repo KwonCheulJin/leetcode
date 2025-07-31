@@ -22,8 +22,8 @@
 
 <ul>
 	<li><code>1 &lt;= s.length, t.length &lt;= 5 * 10<sup>4</sup></code></li>
-	<li><code>s</code>와 <code>t</code>는 소문자 영어 알파벳으로 구성되어 있습니다.</li>
+	<li><code>s</code>와 <code>t</code>는 소문자 영어 알파벳으로 구성됩니다.</li>
 </ul>
 
 <p>&nbsp;</p>
-<p><strong>추가 과제:</strong> 입력에 유니코드 문자가 포함된다면 어떻게 해결 방식을 조정할 수 있을까요?</p>
+<p><strong>추가 문제:</strong> 입력이 유니코드 문자로 구성된 경우에는 어떻게 해결할 수 있을까요?</p>

@@ -1,58 +1,60 @@
-<h2><a href="https://leetcode.com/problems/valid-parentheses">20. 유효한 괄호</a></h2><h3>쉬움</h3><hr><p>문자 <code>&#39;(&#39;</code>, <code>&#39;)&#39;</code>, <code>&#39;{&#39;</code>, <code>&#39;}&#39;</code>, <code>&#39;[&#39;</code>, <code>&#39;]&#39;</code> 만 포함된 문자열 <code>s</code>가 주어질 때, 입력 문자열이 유효한지 확인하세요.</p>
+```html
+<h2><a href="https://leetcode.com/problems/valid-parentheses">20. Valid Parentheses</a></h2><h3>Easy</h3><hr><p>Given a string <code>s</code> consisting of characters <code>'('</code>, <code>')'</code>, <code>'{'</code>, <code>'}'</code>, <code>'['</code>, and <code>']'</code>, determine if the input string is valid.</p>
 
-<p>입력 문자열이 유효하려면 다음을 만족해야 합니다:</p>
+<p>An input string is valid if the following conditions are met:</p>
 
 <ol>
-	<li>여는 괄호는 반드시 같은 유형의 괄호로 닫혀야 합니다.</li>
-	<li>여는 괄호는 올바른 순서로 닫혀야 합니다.</li>
-	<li>모든 닫는 괄호는 해당하는 유형의 여는 괄호가 있어야 합니다.</li>
+	<li>Open brackets must be closed by the same type of brackets.</li>
+	<li>Open brackets must be closed in the correct order.</li>
+	<li>Every close bracket has a corresponding open bracket of the same type.</li>
 </ol>
 
 <p>&nbsp;</p>
-<p><strong class="example">예시 1:</strong></p>
+<p><strong class="example">Example 1:</strong></p>
 
 <div class="example-block">
-<p><strong>입력:</strong> <span class="example-io">s = &quot;()&quot;</span></p>
+<p><strong>Input:</strong> <span class="example-io">s = "()" </span></p>
 
-<p><strong>출력:</strong> <span class="example-io">true</span></p>
+<p><strong>Output:</strong> <span class="example-io">true</span></p>
 </div>
 
-<p><strong class="example">예시 2:</strong></p>
+<p><strong class="example">Example 2:</strong></p>
 
 <div class="example-block">
-<p><strong>입력:</strong> <span class="example-io">s = &quot;()[]{}&quot;</span></p>
+<p><strong>Input:</strong> <span class="example-io">s = "()[]{}"</span></p>
 
-<p><strong>출력:</strong> <span class="example-io">true</span></p>
+<p><strong>Output:</strong> <span class="example-io">true</span></p>
 </div>
 
-<p><strong class="example">예시 3:</strong></p>
+<p><strong class="example">Example 3:</strong></p>
 
 <div class="example-block">
-<p><strong>입력:</strong> <span class="example-io">s = &quot;(]&quot;</span></p>
+<p><strong>Input:</strong> <span class="example-io">s = "(]"</span></p>
 
-<p><strong>출력:</strong> <span class="example-io">false</span></p>
+<p><strong>Output:</strong> <span class="example-io">false</span></p>
 </div>
 
-<p><strong class="example">예시 4:</strong></p>
+<p><strong class="example">Example 4:</strong></p>
 
 <div class="example-block">
-<p><strong>입력:</strong> <span class="example-io">s = &quot;([])&quot;</span></p>
+<p><strong>Input:</strong> <span class="example-io">s = "([])"</span></p>
 
-<p><strong>출력:</strong> <span class="example-io">true</span></p>
+<p><strong>Output:</strong> <span class="example-io">true</span></p>
 </div>
 
-<p><strong class="example">예시 5:</strong></p>
+<p><strong class="example">Example 5:</strong></p>
 
 <div class="example-block">
-<p><strong>입력:</strong> <span class="example-io">s = &quot;([)]&quot;</span></p>
+<p><strong>Input:</strong> <span class="example-io">s = "([)]"</span></p>
 
-<p><strong>출력:</strong> <span class="example-io">false</span></p>
+<p><strong>Output:</strong> <span class="example-io">false</span></p>
 </div>
 
 <p>&nbsp;</p>
-<p><strong>제약 사항:</strong></p>
+<p><strong>Constraints:</strong></p>
 
 <ul>
-	<li><code>1 &lt;= s.length &lt;= 10<sup>4</sup></code></li>
-	<li><code>s</code>는 괄호만으로 구성되어 있습니다 <code>&#39;()[]{}&#39;</code>.</li>
+	<li><code>1 <= s.length <= 10<sup>4</sup></code></li>
+	<li><code>s</code> consists of parentheses only <code>'()[]{}'</code>.</li>
 </ul>
+```

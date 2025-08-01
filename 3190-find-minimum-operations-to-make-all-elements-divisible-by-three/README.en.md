@@ -1,6 +1,7 @@
-<h2><a href="https://leetcode.com/problems/find-minimum-operations-to-make-all-elements-divisible-by-three">3190. Find Minimum Operations to Make All Elements Divisible by Three</a></h2><h3>Easy</h3><hr><p>You are given an integer array <code>nums</code>. In one operation, you can add or subtract 1 from <strong>any</strong> element of <code>nums</code>.</p>
+```html
+<h2><a href="https://leetcode.com/problems/find-minimum-operations-to-make-all-elements-divisible-by-three">3190. Find Minimum Operations to Make All Elements Divisible by Three</a></h2><h3>Easy</h3><hr><p>Given an integer array <code>nums</code>, you can perform one operation to either add or subtract 1 from <strong>any</strong> element of <code>nums</code>.</p>
 
-<p>Return the <strong>minimum</strong> number of operations to make all elements of <code>nums</code> divisible by 3.</p>
+<p>Return the <strong>minimum</strong> number of operations required to make all elements of <code>nums</code> divisible by 3.</p>
 
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
@@ -12,7 +13,7 @@
 
 <p><strong>Explanation:</strong></p>
 
-<p>All array elements can be made divisible by 3 using 3 operations:</p>
+<p>All array elements can be made divisible by 3 with 3 operations:</p>
 
 <ul>
 	<li>Subtract 1 from 1.</li>
@@ -36,3 +37,4 @@
 	<li><code>1 &lt;= nums.length &lt;= 50</code></li>
 	<li><code>1 &lt;= nums[i] &lt;= 50</code></li>
 </ul>
+```

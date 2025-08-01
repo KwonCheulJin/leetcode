@@ -1,7 +1,7 @@
-<h2><a href="https://leetcode.com/problems/find-the-maximum-achievable-number">2769. Find the Maximum Achievable Number</a></h2><h3>Easy</h3><hr><p>Given two integers, <code>num</code> and <code>t</code>. A <strong>number is achievable</strong> if it can become equal to <code>num</code> after applying the following operation:</p>
+<h2><a href="https://leetcode.com/problems/find-the-maximum-achievable-number">2769. Find the Maximum Achievable Number</a></h2><h3>Easy</h3><hr><p>Two integers <code>num</code> and <code>t</code> are given. A <strong>maximum achievable number</strong> is defined as a number that can be made equal to <code>num</code> after applying the following operation:</p>
 
 <ul>
-	<li>Increase or decrease the number by <code>1</code>, and simultaneously increase or decrease <code>num</code> by <code>1</code>.</li>
+	<li>Increase or decrease the number by <code>1</code>, while simultaneously increasing or decreasing <code>num</code> by <code>1</code>.</li>
 </ul>
 
 <p>Return the <strong>maximum achievable number</strong> after applying the operation at most <code>t</code> times.</p>
@@ -16,7 +16,7 @@
 
 <p><strong>Explanation:</strong></p>
 
-<p>Apply the following operation once to make the maximum achievable number equal to <code>num</code>:</p>
+<p>By applying the operation once, we can make the maximum achievable number equal to <code>num</code>:</p>
 
 <ul>
 	<li>Decrease the maximum achievable number by 1, and increase <code>num</code> by 1.</li>
@@ -32,7 +32,7 @@
 
 <p><strong>Explanation:</strong></p>
 
-<p>Apply the following operation twice to make the maximum achievable number equal to <code>num</code>:</p>
+<p>By applying the operation twice, we can make the maximum achievable number equal to <code>num</code>:</p>
 
 <ul>
 	<li>Decrease the maximum achievable number by 1, and increase <code>num</code> by 1.</li>
@@ -43,5 +43,5 @@
 <p><strong>Constraints:</strong></p>
 
 <ul>
-	<li><code>1 &lt;= num, t&nbsp;&lt;= 50</code></li>
+	<li><code>1 &lt;= num, t &lt;= 50</code></li>
 </ul>

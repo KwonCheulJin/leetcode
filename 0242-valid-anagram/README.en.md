@@ -22,8 +22,8 @@
 
 <ul>
 	<li><code>1 &lt;= s.length, t.length &lt;= 5 * 10<sup>4</sup></code></li>
-	<li><code>s</code> and <code>t</code> consist of lowercase English letters.</li>
+	<li>Both <code>s</code> and <code>t</code> consist of lowercase English letters only.</li>
 </ul>
 
 <p>&nbsp;</p>
-<p><strong>Follow up:</strong> What if the inputs contain Unicode characters? How would you adapt your solution to such a case?</p>
+<p><strong>Follow-up:</strong> What will you do if the inputs contain Unicode characters?</p>

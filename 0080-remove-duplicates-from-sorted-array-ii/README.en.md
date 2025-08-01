@@ -1,53 +1,55 @@
-<h2><a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii">80. 정렬된 배열에서 중복 제거 II</a></h2><h3>중간</h3><hr><p>비내림차순으로 정렬된 정수 배열 <code>nums</code>가 주어졌을 때, 일부 중복을 <a href="https://en.wikipedia.org/wiki/In-place_algorithm" target="_blank"><strong>제자리</strong></a>에서 제거하여 각 고유 요소가 <strong>최대 두 번</strong> 나타나도록 하세요. 요소의 <strong>상대적인 순서</strong>는 <strong>동일하게</strong> 유지되어야 합니다.</p>
+```html
+<h2><a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii">80. Remove Duplicates from Sorted Array II</a></h2><h3>Medium</h3><hr><p>Given a sorted integer array <code>nums</code> in non-decreasing order, remove some duplicates in-place such that each unique element appears at most <strong>twice</strong>. The <strong>relative order</strong> of the elements should be kept the <strong>same</strong>.</p>
 
-<p>일부 언어에서는 배열의 길이를 변경하는 것이 불가능하므로, 대신 결과를 배열 <code>nums</code>의 <strong>첫 부분</strong>에 배치해야 합니다. 더 정확히 말하면, 중복을 제거한 후 <code>k</code> 개의 요소가 있는 경우, <code>nums</code>의 첫 <code>k</code> 요소가 최종 결과를 유지하게 해야 합니다. 첫 <code>k</code> 요소 이후에 무엇이 남아 있는지는 중요하지 않습니다.</p>
+<p>Since it is impossible to change the length of the array in some languages, you must instead put the result in the <strong>first part</strong> of the array <code>nums</code>. Specifically, if there are <code>k</code> elements after removing the duplicates, then the first <code>k</code> elements of <code>nums</code> should hold the final result. It does not matter what you leave beyond the first <code>k</code> elements.</p>
 
-<p>최종 결과를 <code>nums</code>의 처음 <code>k</code> 자리로 배치한 후 <code>k</code>를 반환하세요.</p>
+<p>Return <code>k</code> after placing the final result in the first <code>k</code> slots of <code>nums</code>.</p>
 
-<p>다른 배열을 위한 추가 공간을 할당하지 <strong>마세요</strong>. 추가로 O(1) 메모리를 사용하며 <strong>입력 배열을 <a href="https://en.wikipedia.org/wiki/In-place_algorithm" target="_blank">제자리</a>에서 수정하여</strong> 이 작업을 수행해야 합니다.</p>
+<p>Do not allocate extra space for another array. You must do this by modifying the input array <strong>in-place</strong> and using only O(1) extra memory.</p>
 
-<p><strong>사용자 정의 판사:</strong></p>
+<p><strong>Custom Judge:</strong></p>
 
-<p>판사는 다음 코드로 당신의 솔루션을 테스트할 것입니다:</p>
+<p>The judge will test your solution with the following code:</p>
 
 <pre>
-int[] nums = [...]; // 입력 배열
-int[] expectedNums = [...]; // 올바른 길이를 가진 예상 답안
+int[] nums = [...]; // input array
+int[] expectedNums = [...]; // expected answer with correct length
 
-int k = removeDuplicates(nums); // 당신의 구현을 호출합니다
+int k = removeDuplicates(nums); // call your implementation
 
 assert k == expectedNums.length;
-for (int i = 0; i &lt; k; i++) {
+for (int i = 0; i < k; i++) {
     assert nums[i] == expectedNums[i];
 }
 </pre>
 
-<p>모든 주장이 통과하면, 당신의 솔루션은 <strong>허용</strong>될 것입니다.</p>
+<p>If all assertions pass, your solution will be <strong>accepted</strong>.</p>
 
 <p>&nbsp;</p>
-<p><strong class="example">예제 1:</strong></p>
+<p><strong class="example">Example 1:</strong></p>
 
 <pre>
-<strong>입력:</strong> nums = [1,1,1,2,2,3]
-<strong>출력:</strong> 5, nums = [1,1,2,2,3,_]
-<strong>설명:</strong> 당신의 함수는 k = 5를 반환해야 하며, nums의 첫 다섯 요소는 각각 1, 1, 2, 2, 3이어야 합니다.
-반환된 k 이후에 남아있는 것은 중요하지 않습니다(그래서 밑줄로 표현됩니다).
+<strong>Input:</strong> nums = [1,1,1,2,2,3]
+<strong>Output:</strong> 5, nums = [1,1,2,2,3,_]
+<strong>Explanation:</strong> Your function should return k = 5, with the first five elements of nums being 1, 1, 2, 2, 3.
+The elements beyond k do not matter (hence they are represented with underscores).
 </pre>
 
-<p><strong class="example">예제 2:</strong></p>
+<p><strong class="example">Example 2:</strong></p>
 
 <pre>
-<strong>입력:</strong> nums = [0,0,1,1,1,1,2,3,3]
-<strong>출력:</strong> 7, nums = [0,0,1,1,2,3,3,_,_]
-<strong>설명:</strong> 당신의 함수는 k = 7을 반환해야 하며, nums의 첫 일곱 요소는 각각 0, 0, 1, 1, 2, 3, 3이어야 합니다.
-반환된 k 이후에 남아있는 것은 중요하지 않습니다(그래서 밑줄로 표현됩니다).
+<strong>Input:</strong> nums = [0,0,1,1,1,1,2,3,3]
+<strong>Output:</strong> 7, nums = [0,0,1,1,2,3,3,_,_]
+<strong>Explanation:</strong> Your function should return k = 7, with the first seven elements of nums being 0, 0, 1, 1, 2, 3, 3.
+The elements beyond k do not matter (hence they are represented with underscores).
 </pre>
 
 <p>&nbsp;</p>
-<p><strong>제약 조건:</strong></p>
+<p><strong>Constraints:</strong></p>
 
 <ul>
-	<li><code>1 &lt;= nums.length &lt;= 3 * 10<sup>4</sup></code></li>
-	<li><code>-10<sup>4</sup> &lt;= nums[i] &lt;= 10<sup>4</sup></code></li>
-	<li><code>nums</code>는 <strong>비내림차순</strong>으로 정렬되어 있습니다.</li>
+	<li><code>1 <= nums.length <= 3 * 10<sup>4</sup></code></li>
+	<li><code>-10<sup>4</sup> <= nums[i] <= 10<sup>4</sup></code></li>
+	<li><code>nums</code> is sorted in <strong>non-decreasing</strong> order.</li>
 </ul>
+```

@@ -1,42 +1,36 @@
-<h2><a href="https://leetcode.com/problems/contains-duplicate">217. Contains Duplicate</a></h2><h3>Easy</h3><hr><p>Given an integer array <code>nums</code>, return <code>true</code> if any value appears at least twice in the array, and return <code>false</code> if every element is distinct.</p>
+217. Contains DuplicateEasyGiven an integer array `nums`, return `true` if any value appears at least twice in the array, and return `false` if every element is distinct.
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
+ 
 
-<div class="example-block">
-<p><strong>Input:</strong> <span class="example-io">nums = [1,2,3,1]</span></p>
+Example 1:
 
-<p><strong>Output:</strong> <span class="example-io">true</span></p>
+**Input:** nums = [1,2,3,1]
 
-<p><strong>Explanation:</strong></p>
+**Output:** true
 
-<p>The element 1 appears at indices 0 and 3.</p>
-</div>
+**Explanation:**
 
-<p><strong class="example">Example 2:</strong></p>
+The element 1 appears at indices 0 and 3.
 
-<div class="example-block">
-<p><strong>Input:</strong> <span class="example-io">nums = [1,2,3,4]</span></p>
+Example 2:
 
-<p><strong>Output:</strong> <span class="example-io">false</span></p>
+**Input:** nums = [1,2,3,4]
 
-<p><strong>Explanation:</strong></p>
+**Output:** false
 
-<p>All elements are distinct.</p>
-</div>
+**Explanation:**
 
-<p><strong class="example">Example 3:</strong></p>
+All elements are distinct.
 
-<div class="example-block">
-<p><strong>Input:</strong> <span class="example-io">nums = [1,1,1,3,3,4,3,2,4,2]</span></p>
+Example 3:
 
-<p><strong>Output:</strong> <span class="example-io">true</span></p>
-</div>
+**Input:** nums = [1,1,1,3,3,4,3,2,4,2]
 
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
+**Output:** true
 
-<ul>
-	<li><code>1 &lt;= nums.length &lt;= 10<sup>5</sup></code></li>
-	<li><code>-10<sup>9</sup> &lt;= nums[i] &lt;= 10<sup>9</sup></code></li>
-</ul>
+ 
+
+**Constraints:**
+
+1 <= nums.length <= 10⁴
+-10⁴ <= nums[i] <= 10⁴

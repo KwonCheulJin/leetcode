@@ -47,6 +47,52 @@ class EnglishReadmeTranslator {
   }
 
   /**
+   * HTML 코드블럭을 제거하고 마크다운으로 변환
+   */
+  private removeHtmlCodeBlocks(content: string): string {
+    // ```html로 시작하고 ```로 끝나는 패턴 찾기
+    const htmlBlockRegex = /^```html\s*\n([\s\S]*?)\n```$/gm;
+    
+    return content.replace(htmlBlockRegex, (match, htmlContent) => {
+      console.log('  ⚠️ HTML 코드블럭 감지됨, 마크다운으로 변환 중...');
+      
+      // HTML 태그를 마크다운으로 변환
+      return htmlContent
+        // <h2><a href="...">제목</a></h2> -> ## [제목](링크)
+        .replace(/<h2><a href="([^"]+)">([^<]+)<\/a><\/h2>/g, '## [$2]($1)')
+        // <h3>난이도</h3> -> ### 난이도
+        .replace(/<h3>([^<]+)<\/h3>/g, '### $1')
+        // <hr> 제거
+        .replace(/<hr\s*\/?>/g, '')
+        // <p>텍스트</p> -> 텍스트 (두 줄바꿈)
+        .replace(/<p>([^<]*(?:<[^p\/][^>]*>[^<]*<\/[^>]+>[^<]*)*[^<]*)<\/p>/g, '$1\n')
+        // <code>코드</code> -> `코드`
+        .replace(/<code>([^<]+)<\/code>/g, '`$1`')
+        // <strong>텍스트</strong> -> **텍스트**
+        .replace(/<strong>([^<]+)<\/strong>/g, '**$1**')
+        // <em>텍스트</em> -> *텍스트*
+        .replace(/<em>([^<]+)<\/em>/g, '*$1*')
+        // <strong class="example">Example X:</strong> -> **Example X:**
+        .replace(/<strong class="example">([^<]+)<\/strong>/g, '**$1**')
+        // <pre>내용</pre> -> ```\n내용\n```
+        .replace(/<pre>\s*([\s\S]*?)\s*<\/pre>/g, '```\n$1\n```')
+        // <ul><li>항목</li></ul> -> - 항목
+        .replace(/<ul>\s*<li>([^<]+)<\/li>\s*<\/ul>/g, '- $1')
+        .replace(/<ul>([\s\S]*?)<\/ul>/g, (match, listContent) => {
+          return listContent.replace(/<li>([^<]*(?:<[^\/][^>]*>[^<]*<\/[^>]+>[^<]*)*[^<]*)<\/li>/g, '- $1');
+        })
+        // HTML 엔티티 변환
+        .replace(/&nbsp;/g, ' ')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&amp;/g, '&')
+        // 연속된 줄바꿈 정리
+        .replace(/\n{3,}/g, '\n\n')
+        .trim();
+    });
+  }
+
+  /**
    * 한국어 README를 영어로 번역
    */
   async translateToEnglish(koreanContent: string, problemNumber: string): Promise<string> {
@@ -55,16 +101,25 @@ class EnglishReadmeTranslator {
 다음은 LeetCode 문제 번호 ${problemNumber}의 한국어 README 파일입니다. 
 이를 정확한 영어로 번역해주세요. 번역할 때 다음 규칙을 지켜주세요:
 
-1. HTML 태그 구조는 그대로 유지
+1. 마크다운 형식으로 번역 (HTML 태그를 마크다운으로 변환)
 2. LeetCode 문제의 표준적인 영어 표현 사용
 3. 제목은 LeetCode 공식 영어 제목으로 변경
 4. 기술적 용어는 표준 영어 용어 사용
 5. 예시, 제약조건 등은 정확히 번역
+6. HTML 코드블럭(```html```)은 절대 사용하지 말고 순수 마크다운만 사용
+
+변환 규칙:
+- <h2><a href="...">제목</a></h2> → ## [제목](링크)
+- <h3>난이도</h3> → ### 난이도
+- <p>텍스트</p> → 텍스트 (단락 구분)
+- <code>코드</code> → \`코드\`
+- <strong>텍스트</strong> → **텍스트**
+- <pre>코드</pre> → \`\`\`\n코드\n\`\`\`
 
 한국어 내용:
 ${koreanContent}
 
-영어로 번역된 결과만 반환해주세요.
+순수 마크다운 형식으로 번역된 결과만 반환해주세요. HTML 코드블럭은 절대 사용하지 마세요.
 `;
 
       const response = await this.openai.chat.completions.create({
@@ -72,7 +127,7 @@ ${koreanContent}
         messages: [
           {
             role: 'system',
-            content: 'You are a professional translator specializing in technical documentation and LeetCode problems. Translate Korean content to accurate, natural English while maintaining HTML structure and technical accuracy.'
+            content: 'You are a professional translator specializing in technical documentation and LeetCode problems. Translate Korean content to accurate, natural English using pure Markdown format. Never use HTML code blocks (```html```). Convert HTML tags to proper Markdown syntax.'
           },
           {
             role: 'user',
@@ -83,10 +138,13 @@ ${koreanContent}
         max_tokens: 2000
       });
 
-      const translation = response.choices[0]?.message?.content?.trim();
+      let translation = response.choices[0]?.message?.content?.trim();
       if (!translation) {
         throw new Error('번역 결과가 비어있습니다.');
       }
+
+      // HTML 코드블럭이 생성되었다면 제거하고 마크다운으로 변환
+      translation = this.removeHtmlCodeBlocks(translation);
 
       return translation;
     } catch (error) {

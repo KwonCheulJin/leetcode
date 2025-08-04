@@ -1,22 +1,28 @@
-```html
-<h2><a href="https://leetcode.com/problems/jewels-and-stones">782. Jewels and Stones</a></h2><h3>Easy</h3><hr><p>You are given two strings, <code>jewels</code> representing the types of jewels and <code>stones</code> representing the stones you have. Each character in <code>stones</code> represents the type of stone you have. You want to know how many of the stones you have are jewels.</p>
+## [782. Jewels and Stones](https://leetcode.com/problems/jewels-and-stones)
 
-<p>Letters are case-sensitive, so <code>&quot;a&quot;</code> is considered a different type of stone than <code>&quot;A&quot;</code>.</p>
+### Easy
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
-<pre><strong>Input:</strong> jewels = "aA", stones = "aAAbbbb"
-<strong>Output:</strong> 3
-</pre><p><strong class="example">Example 2:</strong></p>
-<pre><strong>Input:</strong> jewels = "z", stones = "ZZ"
-<strong>Output:</strong> 0
-</pre>
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
+You are given two strings, `jewels` representing the types of jewels and `stones` representing the stones you have. Each character in `stones` represents the type of stone you have. You want to know how many of the stones you have are jewels.
 
-<ul>
-	<li><code>1 &lt;= jewels.length, stones.length &lt;= 50</code></li>
-	<li><code>jewels</code> and <code>stones</code> consist of only English letters.</li>
-	<li>All characters in <code>jewels</code> are <strong>unique</strong>.</li>
-</ul>
+Letters are case-sensitive, so `&quot;a&quot;` is considered a different type of stone than `&quot;A&quot;`.
+
+ 
+
+**Example 1:**
+
 ```
+**Input:** jewels = "aA", stones = "aAAbbbb"
+**Output:** 3
+```**Example 2:**
+
+```
+**Input:** jewels = "z", stones = "ZZ"
+**Output:** 0
+```
+ 
+
+**Constraints:**
+
+- ```1 <= jewels.length, stones.length <= 50```
+- ```jewels` and `stones` consist of only English letters.``
+- All characters in `jewels` are **unique**.

@@ -1,38 +1,36 @@
-```html
-<h2><a href="https://leetcode.com/problems/score-of-a-string/solutions/5241514/3110-score-of-a-string/">3110. Score of a String</a></h2><h3>Easy</h3><hr><p>You are given a string <code>s</code>. The <strong>score</strong> of the string is defined as the sum of the absolute differences of the <strong>ASCII</strong> values of adjacent characters.</p>
+## [3110. Score of a String](https://leetcode.com/problems/score-of-a-string/solutions/5241514/3110-score-of-a-string/)
 
-<p>Return the <strong>score</strong> of the string <code>s</code>.</p>
+### Easy
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
+You are given a string `s`. The **score** of the string is defined as the sum of the absolute differences of the **ASCII** values of adjacent characters.
 
-<div class="example-block">
-<p><strong>Input:</strong> <span class="example-io">s = &quot;hello&quot;</span></p>
+Return the **score** of the string `s`.
 
-<p><strong>Output:</strong> <span class="example-io">13</span></p>
+ 
 
-<p><strong>Explanation:</strong></p>
+**Example 1:**
 
-<p>The <strong>ASCII</strong> values of the characters in <code>s</code> are: <code>&#39;h&#39; = 104</code>, <code>&#39;e&#39; = 101</code>, <code>&#39;l&#39; = 108</code>, <code>&#39;o&#39; = 111</code>. Therefore, the score of <code>s</code> is <code>|104 - 101| + |101 - 108| + |108 - 108| + |108 - 111| = 3 + 7 + 0 + 3 = 13</code>.</p>
-</div>
+**Input:** s = &quot;hello&quot;
 
-<p><strong class="example">Example 2:</strong></p>
+**Output:** 13
 
-<div class="example-block">
-<p><strong>Input:</strong> <span class="example-io">s = &quot;zaz&quot;</span></p>
+**Explanation:**
 
-<p><strong>Output:</strong> <span class="example-io">50</span></p>
+The **ASCII** values of the characters in `s` are: `&#39;h&#39; = 104`, `&#39;e&#39; = 101`, `&#39;l&#39; = 108`, `&#39;o&#39; = 111`. Therefore, the score of `s` is `|104 - 101| + |101 - 108| + |108 - 108| + |108 - 111| = 3 + 7 + 0 + 3 = 13`.
 
-<p><strong>Explanation:</strong></p>
+**Example 2:**
 
-<p>The <strong>ASCII</strong> values of the characters in <code>s</code> are: <code>&#39;z&#39; = 122</code>, <code>&#39;a&#39; = 97</code>. Therefore, the score of <code>s</code> is <code>|122 - 97| + |97 - 122| = 25 + 25 = 50</code>.</p>
-</div>
+**Input:** s = &quot;zaz&quot;
 
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
+**Output:** 50
 
-<ul>
-	<li><code>2 &lt;= s.length &lt;= 100</code></li>
-	<li><code>s</code> consists of lowercase English letters only.</li>
-</ul>
-```
+**Explanation:**
+
+The **ASCII** values of the characters in `s` are: `&#39;z&#39; = 122`, `&#39;a&#39; = 97`. Therefore, the score of `s` is `|122 - 97| + |97 - 122| = 25 + 25 = 50`.
+
+ 
+
+**Constraints:**
+
+- ```2 <= s.length <= 100```
+- ```s` consists of lowercase English letters only.``

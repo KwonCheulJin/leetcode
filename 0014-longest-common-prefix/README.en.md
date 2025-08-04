@@ -1,30 +1,32 @@
-```html
-<h2><a href="https://leetcode.com/problems/longest-common-prefix">14. Longest Common Prefix</a></h2><h3>Easy</h3><hr><p>Write a function to find the longest common prefix string amongst an array of strings.</p>
+## [14. Longest Common Prefix](https://leetcode.com/problems/longest-common-prefix)
 
-<p>If there is no common prefix, return an empty string <code>&quot;&quot;</code>.</p>
+### Easy
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
+Write a function to find the longest common prefix string amongst an array of strings.
 
-<pre>
-<strong>Input:</strong> strs = [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;]
-<strong>Output:</strong> &quot;fl&quot;
-</pre>
+If there is no common prefix, return an empty string `&quot;&quot;`.
 
-<p><strong class="example">Example 2:</strong></p>
+ 
 
-<pre>
-<strong>Input:</strong> strs = [&quot;dog&quot;,&quot;racecar&quot;,&quot;car&quot;]
-<strong>Output:</strong> &quot;&quot;
-<strong>Explanation:</strong> There is no common prefix among the input strings.
-</pre>
+**Example 1:**
 
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
-
-<ul>
-	<li><code>1 &lt;= strs.length &lt;= 200</code></li>
-	<li><code>0 &lt;= strs[i].length &lt;= 200</code></li>
-	<li><code>strs[i]</code> consists of only lowercase English letters.</li>
-</ul>
 ```
+**Input:** strs = [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;]
+**Output:** &quot;fl&quot;
+```
+
+**Example 2:**
+
+```
+**Input:** strs = [&quot;dog&quot;,&quot;racecar&quot;,&quot;car&quot;]
+**Output:** &quot;&quot;
+**Explanation:** There is no common prefix among the input strings.
+```
+
+ 
+
+**Constraints:**
+
+- ```1 <= strs.length <= 200```
+- ```0 <= strs[i].length <= 200```
+- ```strs[i]` consists of only lowercase English letters.``

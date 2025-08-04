@@ -1,39 +1,41 @@
-```html
-<h2><a href="https://leetcode.com/problems/sort-by">2724. Sort By</a></h2><h3>Easy</h3><hr><p>Given an array <code>arr</code> and a function <code>fn</code>, return a sorted array <code>sortedArr</code>. The function <code>fn</code> is assumed to return numbers, which determine the sorting order of <code>sortedArr</code>. <code>sortedArr</code> should be sorted in <strong>ascending</strong> order based on the output of <code>fn</code>.</p>
+## [2724. Sort By](https://leetcode.com/problems/sort-by)
 
-<p>It can be assumed that the function <code>fn</code> does not return duplicate numbers for the given array.</p>
+### Easy
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
+Given an array `arr` and a function `fn`, return a sorted array `sortedArr`. The function `fn` is assumed to return numbers, which determine the sorting order of `sortedArr`. `sortedArr` should be sorted in **ascending** order based on the output of `fn`.
 
-<pre>
-<strong>Input:</strong> arr = [5, 4, 1, 2, 3], fn = (x) =&gt; x
-<strong>Output:</strong> [1, 2, 3, 4, 5]
-<strong>Explanation:</strong> Since fn returns the numbers as they are, the array is sorted in ascending order.
-</pre>
+It can be assumed that the function `fn` does not return duplicate numbers for the given array.
 
-<p><strong class="example">Example 2:</strong></p>
+ 
 
-<pre>
-<strong>Input:</strong> arr = [{"x": 1}, {"x": 0}, {"x": -1}], fn = (d) =&gt; d.x
-<strong>Output:</strong> [{"x": -1}, {"x": 0}, {"x": 1}]
-<strong>Explanation:</strong> fn returns the value for the "x" key. Therefore, the array is sorted based on those values.
-</pre>
+**Example 1:**
 
-<p><strong class="example">Example 3:</strong></p>
-
-<pre>
-<strong>Input:</strong> arr = [[3, 4], [5, 2], [10, 1]], fn = (x) =&gt; x[1]
-<strong>Output:</strong> [[10, 1], [5, 2], [3, 4]]
-<strong>Explanation:</strong> The array is sorted in ascending order based on the number at index=1.&nbsp;
-</pre>
-
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
-
-<ul>
-	<li><code>arr</code> is a valid JSON array</li>
-	<li><code>fn</code> is a function that returns a number</li>
-	<li><code>1 &lt;= arr.length &lt;= 5 * 10<sup>5</sup></code></li>
-</ul>
 ```
+**Input:** arr = [5, 4, 1, 2, 3], fn = (x) => x
+**Output:** [1, 2, 3, 4, 5]
+**Explanation:** Since fn returns the numbers as they are, the array is sorted in ascending order.
+```
+
+**Example 2:**
+
+```
+**Input:** arr = [{"x": 1}, {"x": 0}, {"x": -1}], fn = (d) => d.x
+**Output:** [{"x": -1}, {"x": 0}, {"x": 1}]
+**Explanation:** fn returns the value for the "x" key. Therefore, the array is sorted based on those values.
+```
+
+**Example 3:**
+
+```
+**Input:** arr = [[3, 4], [5, 2], [10, 1]], fn = (x) => x[1]
+**Output:** [[10, 1], [5, 2], [3, 4]]
+**Explanation:** The array is sorted in ascending order based on the number at index=1. 
+```
+
+ 
+
+**Constraints:**
+
+- ```arr` is a valid JSON array``
+- ```fn` is a function that returns a number``
+1

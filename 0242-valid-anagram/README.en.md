@@ -1,29 +1,26 @@
-<h2><a href="https://leetcode.com/problems/valid-anagram">242. Valid Anagram</a></h2><h3>Easy</h3><hr><p>Given two strings <code>s</code> and <code>t</code>, return <code>true</code> if <code>t</code> is an <span data-keyword="anagram">anagram</span> of <code>s</code>, and <code>false</code> otherwise.</p>
+242. Valid AnagramEasyGiven two strings `s` and `t`, return `true` if `t` is an anagram of `s`, and `false` otherwise.
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
+ 
 
-<div class="example-block">
-<p><strong>Input:</strong> <span class="example-io">s = &quot;anagram&quot;, t = &quot;nagaram&quot;</span></p>
+Example 1:
 
-<p><strong>Output:</strong> <span class="example-io">true</span></p>
-</div>
+**Input:** s = &quot;anagram&quot;, t = &quot;nagaram&quot;
 
-<p><strong class="example">Example 2:</strong></p>
+**Output:** true
 
-<div class="example-block">
-<p><strong>Input:</strong> <span class="example-io">s = &quot;rat&quot;, t = &quot;car&quot;</span></p>
+Example 2:
 
-<p><strong>Output:</strong> <span class="example-io">false</span></p>
-</div>
+**Input:** s = &quot;rat&quot;, t = &quot;car&quot;
 
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
+**Output:** false
 
-<ul>
-	<li><code>1 &lt;= s.length, t.length &lt;= 5 * 10<sup>4</sup></code></li>
-	<li>Both <code>s</code> and <code>t</code> consist of lowercase English letters only.</li>
-</ul>
+ 
 
-<p>&nbsp;</p>
-<p><strong>Follow-up:</strong> What will you do if the inputs contain Unicode characters?</p>
+**Constraints:**
+
+1 <= s.length, t.length <= 5 * 10⁴
+- Both `s` and `t` consist of lowercase English letters only.
+
+ 
+
+**Follow-up:** What will you do if the inputs contain Unicode characters?

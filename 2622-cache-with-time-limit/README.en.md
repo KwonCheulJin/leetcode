@@ -1,4 +1,3 @@
-```html
 ## [2622. Time Limited Cache](https://leetcode.com/problems/cache-with-time-limit)
 
 ### Medium
@@ -15,11 +14,9 @@ The class should have three public methods:
 
 **count()**: Returns the number of keys that have not expired.
 
-&nbsp;
+ 
 
 **Example 1:**
-
-```
 Input:
 actions = ["TimeLimitedCache", "set", "get", "count", "get"]
 values = [[], [1, 42, 100], [1], [], [1]]
@@ -53,16 +50,16 @@ At t=200, get(1) is called but the cache is empty, so -1 is returned.
 At t=250, count() is called and since the cache is empty, 0 is returned.
 ```
 
-&nbsp;
+ 
 
 **Constraints:**
 
-- `0 <= key, value <= 10^9`
-- `0 <= duration <= 1000`
-- `1 <= actions.length <= 100`
-- `actions.length === values.length`
-- `actions.length === timeDelays.length`
-- `0 <= timeDelays[i] <= 1450`
-- `actions[i]` is one of `"TimeLimitedCache"`, `"set"`, `"get"`, `"count"`.
+- ```0 <= key, value <= 10^9```
+- ```0 <= duration <= 1000```
+- ```1 <= actions.length <= 100```
+- ```actions.length === values.length```
+- ```actions.length === timeDelays.length```
+- ```0 <= timeDelays[i] <= 1450```
+- ```actions[i]` is one of `"TimeLimitedCache"`, `"set"`, `"get"`, `"count"`.``
 - The first action is always `"TimeLimitedCache"` and should be executed immediately with a 0 millisecond delay.
 ```

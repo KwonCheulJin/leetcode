@@ -1,42 +1,46 @@
-```html
-<h2><a href="https://leetcode.com/problems/check-if-object-instance-of-class">2618. Check if Object Instance of Class</a></h2><h3>Medium</h3><hr><p>Write a function that checks if a given value is an instance of a specific class or superclass. In this problem, an object is considered an instance of that class if it can access the methods of that class.</p>
+## [2618. Check if Object Instance of Class](https://leetcode.com/problems/check-if-object-instance-of-class)
 
-<p>There are no restrictions on the data types that can be passed to the function. For example, the value or class may be <code>undefined</code>.</p>
+### Medium
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
+Write a function that checks if a given value is an instance of a specific class or superclass. In this problem, an object is considered an instance of that class if it can access the methods of that class.
 
-<pre>
-<strong>Input:</strong> func = () =&gt; checkIfInstanceOf(new Date(), Date)
-<strong>Output:</strong> true
-<strong>Explanation: </strong>The object returned by the Date constructor is, by definition, an instance of Date.
-</pre>
+There are no restrictions on the data types that can be passed to the function. For example, the value or class may be `undefined`.
 
-<p><strong class="example">Example 2:</strong></p>
+ 
 
-<pre>
-<strong>Input:</strong> func = () =&gt; { class Animal {}; class Dog extends Animal {}; return checkIfInstanceOf(new Dog(), Animal); }
-<strong>Output:</strong> true
-<strong>Explanation:</strong>
+**Example 1:**
+
+```
+**Input:** func = () => checkIfInstanceOf(new Date(), Date)
+**Output:** true
+**Explanation: **The object returned by the Date constructor is, by definition, an instance of Date.
+```
+
+**Example 2:**
+
+```
+**Input:** func = () => { class Animal {}; class Dog extends Animal {}; return checkIfInstanceOf(new Dog(), Animal); }
+**Output:** true
+**Explanation:**
 class Animal {};
 class Dog extends Animal {};
 checkIfInstanceOf(new Dog(), Animal); // true
 
-Dog is a subclass of Animal. Therefore, the Dog object is an instance of both Dog and Animal.</pre>
+Dog is a subclass of Animal. Therefore, the Dog object is an instance of both Dog and Animal.
+```
 
-<p><strong class="example">Example 3:</strong></p>
+**Example 3:**
 
-<pre>
-<strong>Input:</strong> func = () =&gt; checkIfInstanceOf(Date, Date)
-<strong>Output:</strong> false
-<strong>Explanation: </strong>The Date constructor cannot logically be an instance of itself.
-</pre>
+```
+**Input:** func = () => checkIfInstanceOf(Date, Date)
+**Output:** false
+**Explanation: **The Date constructor cannot logically be an instance of itself.
+```
 
-<p><strong class="example">Example 4:</strong></p>
+**Example 4:**
 
-<pre>
-<strong>Input:</strong> func = () =&gt; checkIfInstanceOf(5, Number)
-<strong>Output:</strong> true
-<strong>Explanation: </strong>5 is a Number. The "instanceof" operator may return false. However, it is considered an instance of Number because it can access Number methods like "toFixed()".
-</pre>
+```
+**Input:** func = () => checkIfInstanceOf(5, Number)
+**Output:** true
+**Explanation: **5 is a Number. The "instanceof" operator may return false. However, it is considered an instance of Number because it can access Number methods like "toFixed()".
 ```

@@ -1,40 +1,36 @@
-```html
-<h2><a href="https://leetcode.com/problems/find-minimum-operations-to-make-all-elements-divisible-by-three">3190. Find Minimum Operations to Make All Elements Divisible by Three</a></h2><h3>Easy</h3><hr><p>Given an integer array <code>nums</code>, you can perform one operation to either add or subtract 1 from <strong>any</strong> element of <code>nums</code>.</p>
+## [3190. Find Minimum Operations to Make All Elements Divisible by Three](https://leetcode.com/problems/find-minimum-operations-to-make-all-elements-divisible-by-three)
 
-<p>Return the <strong>minimum</strong> number of operations required to make all elements of <code>nums</code> divisible by 3.</p>
+### Easy
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
+Given an integer array `nums`, you can perform one operation to either add or subtract 1 from **any** element of `nums`.
 
-<div class="example-block">
-<p><strong>Input:</strong> <span class="example-io">nums = [1,2,3,4]</span></p>
+Return the **minimum** number of operations required to make all elements of `nums` divisible by 3.
 
-<p><strong>Output:</strong> <span class="example-io">3</span></p>
+ 
 
-<p><strong>Explanation:</strong></p>
+**Example 1:**
 
-<p>All array elements can be made divisible by 3 with 3 operations:</p>
+**Input:** nums = [1,2,3,4]
 
-<ul>
-	<li>Subtract 1 from 1.</li>
-	<li>Add 1 to 2.</li>
-	<li>Subtract 1 from 4.</li>
-</ul>
-</div>
+**Output:** 3
 
-<p><strong class="example">Example 2:</strong></p>
+**Explanation:**
 
-<div class="example-block">
-<p><strong>Input:</strong> <span class="example-io">nums = [3,6,9]</span></p>
+All array elements can be made divisible by 3 with 3 operations:
 
-<p><strong>Output:</strong> <span class="example-io">0</span></p>
-</div>
+- Subtract 1 from 1.
+- Add 1 to 2.
+- Subtract 1 from 4.
 
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
+**Example 2:**
 
-<ul>
-	<li><code>1 &lt;= nums.length &lt;= 50</code></li>
-	<li><code>1 &lt;= nums[i] &lt;= 50</code></li>
-</ul>
-```
+**Input:** nums = [3,6,9]
+
+**Output:** 0
+
+ 
+
+**Constraints:**
+
+- ```1 <= nums.length <= 50```
+- ```1 <= nums[i] <= 50```

@@ -1,38 +1,40 @@
-```html
-<h2><a href="https://leetcode.com/problems/merge-two-sorted-lists/">21. Merge Two Sorted Lists</a></h2><h3>Easy</h3><hr><p>You are given the head of two sorted linked lists <code>list1</code> and <code>list2</code>.</p>
+## [21. Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/)
 
-<p>Merge the two lists into one <strong>sorted</strong> list. The list should be made by splicing together the nodes of the first two lists.</p>
+### Easy
 
-<p>Return the <em>head</em> of the merged linked list.</p>
+You are given the head of two sorted linked lists `list1` and `list2`.
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2020/10/03/merge_ex1.jpg" style="width: 662px; height: 302px;" />
-<pre>
-<strong>Input:</strong> list1 = [1,2,4], list2 = [1,3,4]
-<strong>Output:</strong> [1,1,2,3,4,4]
-</pre>
+Merge the two lists into one **sorted** list. The list should be made by splicing together the nodes of the first two lists.
 
-<p><strong class="example">Example 2:</strong></p>
+Return the *head* of the merged linked list.
 
-<pre>
-<strong>Input:</strong> list1 = [], list2 = []
-<strong>Output:</strong> []
-</pre>
+ 
 
-<p><strong class="example">Example 3:</strong></p>
+**Example 1:**
 
-<pre>
-<strong>Input:</strong> list1 = [], list2 = [0]
-<strong>Output:</strong> [0]
-</pre>
-
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
-
-<ul>
-	<li>The number of nodes in both lists is in the range <code>[0, 50]</code>.</li>
-	<li><code>-100 &lt;= Node.val &lt;= 100</code></li>
-	<li>Both <code>list1</code> and <code>list2</code> are sorted in <strong>non-decreasing</strong> order.</li>
-</ul>
 ```
+**Input:** list1 = [1,2,4], list2 = [1,3,4]
+**Output:** [1,1,2,3,4,4]
+```
+
+**Example 2:**
+
+```
+**Input:** list1 = [], list2 = []
+**Output:** []
+```
+
+**Example 3:**
+
+```
+**Input:** list1 = [], list2 = [0]
+**Output:** [0]
+```
+
+ 
+
+**Constraints:**
+
+- The number of nodes in both lists is in the range `[0, 50]`.
+- ```-100 <= Node.val <= 100```
+- Both `list1` and `list2` are sorted in **non-decreasing** order.

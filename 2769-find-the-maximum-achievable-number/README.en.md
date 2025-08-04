@@ -1,47 +1,37 @@
-<h2><a href="https://leetcode.com/problems/find-the-maximum-achievable-number">2769. Find the Maximum Achievable Number</a></h2><h3>Easy</h3><hr><p>Two integers <code>num</code> and <code>t</code> are given. A <strong>maximum achievable number</strong> is defined as a number that can be made equal to <code>num</code> after applying the following operation:</p>
+2769. Find the Maximum Achievable NumberEasyTwo integers `num` and `t` are given. A **maximum achievable number** is defined as a number that can be made equal to `num` after applying the following operation:
 
-<ul>
-	<li>Increase or decrease the number by <code>1</code>, while simultaneously increasing or decreasing <code>num</code> by <code>1</code>.</li>
-</ul>
+- Increase or decrease the number by `1`, while simultaneously increasing or decreasing `num` by `1`.
 
-<p>Return the <strong>maximum achievable number</strong> after applying the operation at most <code>t</code> times.</p>
+Return the **maximum achievable number** after applying the operation at most `t` times.
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
+ 
 
-<div class="example-block">
-<p><strong>Input:</strong> <span class="example-io">num = 4, t = 1</span></p>
+Example 1:
 
-<p><strong>Output:</strong> <span class="example-io">6</span></p>
+**Input:** num = 4, t = 1
 
-<p><strong>Explanation:</strong></p>
+**Output:** 6
 
-<p>By applying the operation once, we can make the maximum achievable number equal to <code>num</code>:</p>
+**Explanation:**
 
-<ul>
-	<li>Decrease the maximum achievable number by 1, and increase <code>num</code> by 1.</li>
-</ul>
-</div>
+By applying the operation once, we can make the maximum achievable number equal to `num`:
 
-<p><strong class="example">Example 2:</strong></p>
+- Decrease the maximum achievable number by 1, and increase `num` by 1.
 
-<div class="example-block">
-<p><strong>Input:</strong> <span class="example-io">num = 3, t = 2</span></p>
+Example 2:
 
-<p><strong>Output:</strong> <span class="example-io">7</span></p>
+**Input:** num = 3, t = 2
 
-<p><strong>Explanation:</strong></p>
+**Output:** 7
 
-<p>By applying the operation twice, we can make the maximum achievable number equal to <code>num</code>:</p>
+**Explanation:**
 
-<ul>
-	<li>Decrease the maximum achievable number by 1, and increase <code>num</code> by 1.</li>
-</ul>
-</div>
+By applying the operation twice, we can make the maximum achievable number equal to `num`:
 
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
+- Decrease the maximum achievable number by 1, and increase `num` by 1.
 
-<ul>
-	<li><code>1 &lt;= num, t &lt;= 50</code></li>
-</ul>
+ 
+
+**Constraints:**
+
+- ```1 <= num, t <= 50```

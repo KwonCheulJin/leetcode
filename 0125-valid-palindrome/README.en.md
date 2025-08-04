@@ -1,39 +1,41 @@
-```html
-<h2><a href="https://leetcode.com/problems/valid-palindrome">125. Valid Palindrome</a></h2><h3>Easy</h3><hr><p>To determine if a phrase is a <strong>palindrome</strong>, convert all uppercase letters into lowercase letters, remove all non-alphabetic characters except for letters and numbers, and then check if it reads the same forwards and backwards. Alphabetic characters include both letters and numbers.</p>
+## [125. Valid Palindrome](https://leetcode.com/problems/valid-palindrome)
 
-<p>Given a string <code>s</code>, return <code>true</code> if it is a <strong>palindrome</strong>; otherwise, return <code>false</code>.</p>
+### Easy
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
+To determine if a phrase is a **palindrome**, convert all uppercase letters into lowercase letters, remove all non-alphabetic characters except for letters and numbers, and then check if it reads the same forwards and backwards. Alphabetic characters include both letters and numbers.
 
-<pre>
-<strong>Input:</strong> s = &quot;A man, a plan, a canal: Panama&quot;
-<strong>Output:</strong> true
-<strong>Explanation:</strong> &quot;amanaplanacanalpanama&quot; is a palindrome.
-</pre>
+Given a string `s`, return `true` if it is a **palindrome**; otherwise, return `false`.
 
-<p><strong class="example">Example 2:</strong></p>
+ 
 
-<pre>
-<strong>Input:</strong> s = &quot;race a car&quot;
-<strong>Output:</strong> false
-<strong>Explanation:</strong> &quot;raceacar&quot; is not a palindrome.
-</pre>
+**Example 1:**
 
-<p><strong class="example">Example 3:</strong></p>
-
-<pre>
-<strong>Input:</strong> s = &quot; &quot;
-<strong>Output:</strong> true
-<strong>Explanation:</strong> After removing non-alphabetic characters, the string becomes an empty string &quot;&quot;.
-An empty string reads the same forwards and backwards, thus it is a palindrome.
-</pre>
-
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
-
-<ul>
-	<li><code>1 &lt;= s.length &lt;= 2 * 10<sup>5</sup></code></li>
-	<li><code>s</code> consists of printable ASCII characters only.</li>
-</ul>
 ```
+**Input:** s = &quot;A man, a plan, a canal: Panama&quot;
+**Output:** true
+**Explanation:** &quot;amanaplanacanalpanama&quot; is a palindrome.
+```
+
+**Example 2:**
+
+```
+**Input:** s = &quot;race a car&quot;
+**Output:** false
+**Explanation:** &quot;raceacar&quot; is not a palindrome.
+```
+
+**Example 3:**
+
+```
+**Input:** s = &quot; &quot;
+**Output:** true
+**Explanation:** After removing non-alphabetic characters, the string becomes an empty string &quot;&quot;.
+An empty string reads the same forwards and backwards, thus it is a palindrome.
+```
+
+ 
+
+**Constraints:**
+
+1 
+- ```s` consists of printable ASCII characters only.``

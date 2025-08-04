@@ -21,6 +21,7 @@
     "db:test-data": "tsx scripts/test-data.ts",
     "db:fix-varchar": "tsx scripts/apply-varchar-fix.ts",
     "fix:english": "tsx scripts/fix-english-readmes.ts",
+    "fix:html": "tsx scripts/fix-html-codeblocks.ts",
     "auto:detect-changes": "tsx scripts/detect-problem-changes.ts",
     "auto:test-workflow": "tsx scripts/test-github-workflow.ts"
   },

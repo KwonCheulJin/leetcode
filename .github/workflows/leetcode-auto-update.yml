@@ -6,6 +6,17 @@ on:
     paths:
       - '[0-9][0-9][0-9][0-9]-*/**'
       - '[0-9][0-9][0-9][0-9][0-9]-*/**'
+  workflow_dispatch:
+    inputs:
+      problem_number:
+        description: '처리할 문제 번호 (예: 1, 53, 125)'
+        required: false
+        type: string
+      force_english:
+        description: 'README.en.md 강제 재생성'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   update-database:
@@ -26,39 +37,67 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Detect changed LeetCode problems
+      - name: Detect changed LeetCode problems or handle manual input
         id: detect-changes
         run: |
-          # Get list of changed files in the latest commit
-          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
-          echo "Changed files:"
-          echo "$CHANGED_FILES"
+          # Check if this is a manual workflow dispatch
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "🔧 수동 실행 모드"
+            PROBLEM_NUMBER="${{ github.event.inputs.problem_number }}"
+            
+            if [ -n "$PROBLEM_NUMBER" ]; then
+              # Find problem directory by number
+              PROBLEM_DIR=$(find . -maxdepth 1 -type d -name "${PROBLEM_NUMBER}*" -o -name "0${PROBLEM_NUMBER}*" -o -name "00${PROBLEM_NUMBER}*" -o -name "000${PROBLEM_NUMBER}*" | head -1 | sed 's|^\./||')
+              
+              if [ -n "$PROBLEM_DIR" ]; then
+                echo "📝 수동 실행: 문제 $PROBLEM_NUMBER ($PROBLEM_DIR)"
+                echo "problems=$PROBLEM_DIR" >> $GITHUB_OUTPUT
+                echo "has_changes=true" >> $GITHUB_OUTPUT
+                echo "manual_mode=true" >> $GITHUB_OUTPUT
+              else
+                echo "❌ 문제 번호 $PROBLEM_NUMBER 에 해당하는 디렉토리를 찾을 수 없습니다."
+                echo "has_changes=false" >> $GITHUB_OUTPUT
+                echo "manual_mode=true" >> $GITHUB_OUTPUT
+              fi
+            else
+              echo "❌ 수동 실행 시 문제 번호를 입력해주세요."
+              echo "has_changes=false" >> $GITHUB_OUTPUT
+              echo "manual_mode=true" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "🔄 자동 실행 모드 (푸시 트리거)"
+            # Get list of changed files in the latest commit
+            CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+            echo "Changed files:"
+            echo "$CHANGED_FILES"
 
-          # Find LeetCode problem directories that were modified
-          CHANGED_PROBLEMS=""
-          for file in $CHANGED_FILES; do
-            # Extract problem directory (e.g., "0001-two-sum/README.md" -> "0001-two-sum")
-            if [[ $file =~ ^([0-9]{4,5}-[^/]+)/ ]]; then
-              PROBLEM_DIR="${BASH_REMATCH[1]}"
-              # Add to list if not already present
-              if [[ ! $CHANGED_PROBLEMS =~ $PROBLEM_DIR ]]; then
-                if [ -z "$CHANGED_PROBLEMS" ]; then
-                  CHANGED_PROBLEMS="$PROBLEM_DIR"
-                else
-                  CHANGED_PROBLEMS="$CHANGED_PROBLEMS,$PROBLEM_DIR"
+            # Find LeetCode problem directories that were modified
+            CHANGED_PROBLEMS=""
+            for file in $CHANGED_FILES; do
+              # Extract problem directory (e.g., "0001-two-sum/README.md" -> "0001-two-sum")
+              if [[ $file =~ ^([0-9]{4,5}-[^/]+)/ ]]; then
+                PROBLEM_DIR="${BASH_REMATCH[1]}"
+                # Add to list if not already present
+                if [[ ! $CHANGED_PROBLEMS =~ $PROBLEM_DIR ]]; then
+                  if [ -z "$CHANGED_PROBLEMS" ]; then
+                    CHANGED_PROBLEMS="$PROBLEM_DIR"
+                  else
+                    CHANGED_PROBLEMS="$CHANGED_PROBLEMS,$PROBLEM_DIR"
+                  fi
                 fi
               fi
+            done
+
+            echo "Detected changed problems: $CHANGED_PROBLEMS"
+            echo "problems=$CHANGED_PROBLEMS" >> $GITHUB_OUTPUT
+            echo "manual_mode=false" >> $GITHUB_OUTPUT
+
+            # Set flag for whether any problems were detected
+            if [ -n "$CHANGED_PROBLEMS" ]; then
+              echo "has_changes=true" >> $GITHUB_OUTPUT
+            else
+              echo "has_changes=false" >> $GITHUB_OUTPUT
             fi
-          done
-
-          echo "Detected changed problems: $CHANGED_PROBLEMS"
-          echo "problems=$CHANGED_PROBLEMS" >> $GITHUB_OUTPUT
-
-          # Set flag for whether any problems were detected
-          if [ -n "$CHANGED_PROBLEMS" ]; then
-            echo "has_changes=true" >> $GITHUB_OUTPUT
-          else
-            echo "has_changes=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Extract problem number from directory
@@ -88,12 +127,17 @@ jobs:
         run: |
           PROBLEM_DIR="${{ steps.extract-number.outputs.directory }}"
           PROBLEM_NUMBER="${{ steps.extract-number.outputs.number }}"
+          FORCE_ENGLISH="${{ github.event.inputs.force_english }}"
 
-          if [ ! -f "$PROBLEM_DIR/README.en.md" ]; then
-            echo "README.en.md not found for problem $PROBLEM_NUMBER, creating..."
+          if [ ! -f "$PROBLEM_DIR/README.en.md" ] || [ "$FORCE_ENGLISH" = "true" ]; then
+            if [ "$FORCE_ENGLISH" = "true" ]; then
+              echo "🔄 README.en.md 강제 재생성 모드"
+            else
+              echo "📝 README.en.md not found for problem $PROBLEM_NUMBER, creating..."
+            fi
             npm run fix:english problem $PROBLEM_NUMBER
           else
-            echo "README.en.md already exists for problem $PROBLEM_NUMBER"
+            echo "✅ README.en.md already exists for problem $PROBLEM_NUMBER"
           fi
 
       - name: Process and update database

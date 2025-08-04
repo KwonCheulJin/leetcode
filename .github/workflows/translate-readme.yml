@@ -15,6 +15,11 @@ on:
       - '.github/workflows/translate-readme.yml'
   workflow_dispatch: # 수동 실행 지원
 
+# Use the same concurrency group as leetcode-auto-update to prevent conflicts
+concurrency:
+  group: leetcode-processing-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   translate:
     runs-on: ubuntu-latest
@@ -110,3 +115,89 @@ jobs:
             git commit -m "Update Korean translations [automated]" || echo "Commit failed, but continuing..."
             git push origin main || echo "Push failed, but workflow completed"
           fi
+
+      - name: Trigger database update for new problems
+        if: steps.check_commit.outputs.is_leetcode == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "🔍 Analyzing commit for LeetCode problems to process..."
+          
+          # Get the problem directory from the current commit (LeetHub commit)
+          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+          echo "📋 Changed files: $CHANGED_FILES"
+          
+          # Find all problem directories in the commit
+          PROBLEM_DIRS=()
+          for file in $CHANGED_FILES; do
+            if [[ $file =~ ^([0-9]{4,5}-[^/]+)/README\.md$ ]]; then
+              PROBLEM_DIR="${BASH_REMATCH[1]}"
+              if [[ ! " ${PROBLEM_DIRS[@]} " =~ " ${PROBLEM_DIR} " ]]; then
+                PROBLEM_DIRS+=("$PROBLEM_DIR")
+              fi
+            fi
+          done
+          
+          echo "🎯 Found ${#PROBLEM_DIRS[@]} problem(s) to process: ${PROBLEM_DIRS[*]}"
+          
+          # Process each problem directory
+          for PROBLEM_DIR in "${PROBLEM_DIRS[@]}"; do
+            echo "📝 Processing: $PROBLEM_DIR"
+            
+            # Extract problem number
+            if [[ $PROBLEM_DIR =~ ^([0-9]+) ]]; then
+              PROBLEM_NUMBER="${BASH_REMATCH[1]}"
+              PROBLEM_NUMBER=$((10#$PROBLEM_NUMBER))
+              
+              echo "🚀 Triggering database update for problem $PROBLEM_NUMBER ($PROBLEM_DIR)"
+              
+              # Trigger the database update workflow with retry logic
+              for attempt in {1..3}; do
+                echo "📡 API call attempt $attempt/3"
+                
+                response=$(curl -w "%{http_code}" -s -X POST \
+                  -H "Accept: application/vnd.github+json" \
+                  -H "Authorization: Bearer $GITHUB_TOKEN" \
+                  -H "X-GitHub-Api-Version: 2022-11-28" \
+                  "https://api.github.com/repos/${{ github.repository }}/actions/workflows/leetcode-auto-update.yml/dispatches" \
+                  -d "{\"ref\":\"main\",\"inputs\":{\"problem_number\":\"$PROBLEM_NUMBER\"}}")
+                
+                http_code="${response: -3}"
+                
+                if [ "$http_code" = "204" ]; then
+                  echo "✅ Successfully triggered database update for problem $PROBLEM_NUMBER"
+                  break
+                elif [ $attempt -eq 3 ]; then
+                  echo "❌ Failed to trigger workflow after 3 attempts. HTTP code: $http_code"
+                  echo "Response: ${response%???}"
+                else
+                  echo "⚠️ Attempt $attempt failed (HTTP: $http_code), retrying in 2 seconds..."
+                  sleep 2
+                fi
+              done
+              
+              # Small delay between multiple problems
+              if [ ${#PROBLEM_DIRS[@]} -gt 1 ]; then
+                echo "⏳ Waiting 3 seconds before processing next problem..."
+                sleep 3
+              fi
+            else
+              echo "❌ Could not extract problem number from directory: $PROBLEM_DIR"
+            fi
+          done
+          
+          if [ ${#PROBLEM_DIRS[@]} -eq 0 ]; then
+            echo "ℹ️ No LeetCode problem directories found in changed files"
+            echo "🔍 Files checked: $CHANGED_FILES"
+          else
+            echo "🎉 Completed processing ${#PROBLEM_DIRS[@]} problem(s)"
+          fi
+
+      - name: Workflow completion summary
+        if: steps.check_commit.outputs.is_leetcode == 'true'
+        run: |
+          echo "📊 === LeetHub Processing Complete ==="
+          echo "✅ Korean translation: Complete"
+          echo "✅ Database update trigger: Complete"  
+          echo "🔄 Next: Watch for 'LeetCode Auto Database Update' workflow execution"
+          echo "================================================"

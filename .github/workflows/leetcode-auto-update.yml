@@ -124,10 +124,20 @@ jobs:
 
       - name: Check if README.en.md exists, create if needed
         if: steps.detect-changes.outputs.has_changes == 'true'
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           PROBLEM_DIR="${{ steps.extract-number.outputs.directory }}"
           PROBLEM_NUMBER="${{ steps.extract-number.outputs.number }}"
           FORCE_ENGLISH="${{ github.event.inputs.force_english }}"
+
+          # Check if problem directory exists
+          if [ ! -d "$PROBLEM_DIR" ]; then
+            echo "❌ Problem directory not found: $PROBLEM_DIR"
+            echo "Available directories:"
+            ls -la | grep "^d" | grep -E "[0-9]{4,5}-" | head -5
+            exit 1
+          fi
 
           if [ ! -f "$PROBLEM_DIR/README.en.md" ] || [ "$FORCE_ENGLISH" = "true" ]; then
             if [ "$FORCE_ENGLISH" = "true" ]; then

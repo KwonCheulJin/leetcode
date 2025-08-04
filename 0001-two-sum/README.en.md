@@ -3,7 +3,7 @@
 
 <p>Each input is guaranteed to have <strong><em>exactly</em> one solution</strong>, and you may not use the same element twice.</p>
 
-<p>The answer can be returned in any order.</p>
+<p>You may return the answer in any order.</p>
 
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
@@ -39,5 +39,5 @@
 </ul>
 
 <p>&nbsp;</p>
-<strong>Follow-up:&nbsp;</strong>Can you come up with an algorithm that is less than <code>O(n<sup>2</sup>)</code> time complexity?
+<strong>Follow-up:&nbsp;</strong>Can you come up with an algorithm that is faster than <code>O(n<sup>2</sup>)</code>?
 ```

@@ -2,7 +2,7 @@ name: LeetCode Auto Database Update
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths:
       - '[0-9][0-9][0-9][0-9]-*/**'
       - '[0-9][0-9][0-9][0-9][0-9]-*/**'
@@ -10,156 +10,156 @@ on:
 jobs:
   update-database:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 2
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        cache: 'npm'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
 
-    - name: Install dependencies
-      run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Detect changed LeetCode problems
-      id: detect-changes
-      run: |
-        # Get list of changed files in the latest commit
-        CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
-        echo "Changed files:"
-        echo "$CHANGED_FILES"
-        
-        # Find LeetCode problem directories that were modified
-        CHANGED_PROBLEMS=""
-        for file in $CHANGED_FILES; do
-          # Extract problem directory (e.g., "0001-two-sum/README.md" -> "0001-two-sum")
-          if [[ $file =~ ^([0-9]{4,5}-[^/]+)/ ]]; then
-            PROBLEM_DIR="${BASH_REMATCH[1]}"
-            # Add to list if not already present
-            if [[ ! $CHANGED_PROBLEMS =~ $PROBLEM_DIR ]]; then
-              if [ -z "$CHANGED_PROBLEMS" ]; then
-                CHANGED_PROBLEMS="$PROBLEM_DIR"
-              else
-                CHANGED_PROBLEMS="$CHANGED_PROBLEMS,$PROBLEM_DIR"
+      - name: Detect changed LeetCode problems
+        id: detect-changes
+        run: |
+          # Get list of changed files in the latest commit
+          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+          echo "Changed files:"
+          echo "$CHANGED_FILES"
+
+          # Find LeetCode problem directories that were modified
+          CHANGED_PROBLEMS=""
+          for file in $CHANGED_FILES; do
+            # Extract problem directory (e.g., "0001-two-sum/README.md" -> "0001-two-sum")
+            if [[ $file =~ ^([0-9]{4,5}-[^/]+)/ ]]; then
+              PROBLEM_DIR="${BASH_REMATCH[1]}"
+              # Add to list if not already present
+              if [[ ! $CHANGED_PROBLEMS =~ $PROBLEM_DIR ]]; then
+                if [ -z "$CHANGED_PROBLEMS" ]; then
+                  CHANGED_PROBLEMS="$PROBLEM_DIR"
+                else
+                  CHANGED_PROBLEMS="$CHANGED_PROBLEMS,$PROBLEM_DIR"
+                fi
               fi
             fi
-          fi
-        done
-        
-        echo "Detected changed problems: $CHANGED_PROBLEMS"
-        echo "problems=$CHANGED_PROBLEMS" >> $GITHUB_OUTPUT
-        
-        # Set flag for whether any problems were detected
-        if [ -n "$CHANGED_PROBLEMS" ]; then
-          echo "has_changes=true" >> $GITHUB_OUTPUT
-        else
-          echo "has_changes=false" >> $GITHUB_OUTPUT
-        fi
+          done
 
-    - name: Extract problem number from directory
-      id: extract-number
-      if: steps.detect-changes.outputs.has_changes == 'true'
-      run: |
-        PROBLEMS="${{ steps.detect-changes.outputs.problems }}"
-        # Take only the first problem for single problem processing
-        FIRST_PROBLEM=$(echo "$PROBLEMS" | cut -d',' -f1)
-        echo "Processing problem directory: $FIRST_PROBLEM"
-        
-        # Extract problem number (e.g., "0001-two-sum" -> "1")
-        if [[ $FIRST_PROBLEM =~ ^([0-9]+) ]]; then
-          PROBLEM_NUMBER="${BASH_REMATCH[1]}"
-          # Remove leading zeros
-          PROBLEM_NUMBER=$((10#$PROBLEM_NUMBER))
-          echo "Extracted problem number: $PROBLEM_NUMBER"
-          echo "number=$PROBLEM_NUMBER" >> $GITHUB_OUTPUT
-          echo "directory=$FIRST_PROBLEM" >> $GITHUB_OUTPUT
-        else
-          echo "Could not extract problem number from: $FIRST_PROBLEM"
-          exit 1
-        fi
+          echo "Detected changed problems: $CHANGED_PROBLEMS"
+          echo "problems=$CHANGED_PROBLEMS" >> $GITHUB_OUTPUT
 
-    - name: Check if README.en.md exists, create if needed
-      if: steps.detect-changes.outputs.has_changes == 'true'
-      run: |
-        PROBLEM_DIR="${{ steps.extract-number.outputs.directory }}"
-        PROBLEM_NUMBER="${{ steps.extract-number.outputs.number }}"
-        
-        if [ ! -f "$PROBLEM_DIR/README.en.md" ]; then
-          echo "README.en.md not found for problem $PROBLEM_NUMBER, creating..."
-          npm run fix:english problem $PROBLEM_NUMBER
-        else
-          echo "README.en.md already exists for problem $PROBLEM_NUMBER"
-        fi
-
-    - name: Process and update database
-      if: steps.detect-changes.outputs.has_changes == 'true'
-      env:
-        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-        SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-      run: |
-        PROBLEM_NUMBER="${{ steps.extract-number.outputs.number }}"
-        echo "Processing problem number: $PROBLEM_NUMBER"
-        
-        # Process the problem and update database
-        npm run data:process -- --problem=$PROBLEM_NUMBER
-        
-        echo "✅ Successfully processed problem $PROBLEM_NUMBER"
-
-    - name: Commit English translation if created
-      if: steps.detect-changes.outputs.has_changes == 'true'
-      run: |
-        PROBLEM_DIR="${{ steps.extract-number.outputs.directory }}"
-        
-        # Check if README.en.md was created and commit it
-        if [ -f "$PROBLEM_DIR/README.en.md" ]; then
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          
-          git add "$PROBLEM_DIR/README.en.md"
-          
-          # Only commit if there are changes to commit
-          if ! git diff --staged --quiet; then
-            git commit -m "feat: Add English translation for problem ${{ steps.extract-number.outputs.number }}
-
-🤖 Generated with Claude Code
-Co-Authored-By: Claude <noreply@anthropic.com>"
-            
-            git push
-            echo "✅ Committed English translation for problem ${{ steps.extract-number.outputs.number }}"
+          # Set flag for whether any problems were detected
+          if [ -n "$CHANGED_PROBLEMS" ]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
           else
-            echo "ℹ️ No changes to commit for English translation"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
           fi
-        fi
 
-    - name: Update statistics
-      if: steps.detect-changes.outputs.has_changes == 'true'
-      env:
-        SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-        SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-      run: |
-        echo "📊 Updated database statistics:"
-        npm run data:stats
+      - name: Extract problem number from directory
+        id: extract-number
+        if: steps.detect-changes.outputs.has_changes == 'true'
+        run: |
+          PROBLEMS="${{ steps.detect-changes.outputs.problems }}"
+          # Take only the first problem for single problem processing
+          FIRST_PROBLEM=$(echo "$PROBLEMS" | cut -d',' -f1)
+          echo "Processing problem directory: $FIRST_PROBLEM"
 
-    - name: Report results
-      if: steps.detect-changes.outputs.has_changes == 'true'
-      run: |
-        PROBLEM_NUMBER="${{ steps.extract-number.outputs.number }}"
-        PROBLEM_DIR="${{ steps.extract-number.outputs.directory }}"
-        
-        echo "🎉 LeetCode Auto Update Completed!"
-        echo "   📝 Problem: #$PROBLEM_NUMBER ($PROBLEM_DIR)"
-        echo "   ✅ Database updated successfully"
-        echo "   🌐 English translation processed"
-        echo "   📊 Statistics refreshed"
+          # Extract problem number (e.g., "0001-two-sum" -> "1")
+          if [[ $FIRST_PROBLEM =~ ^([0-9]+) ]]; then
+            PROBLEM_NUMBER="${BASH_REMATCH[1]}"
+            # Remove leading zeros
+            PROBLEM_NUMBER=$((10#$PROBLEM_NUMBER))
+            echo "Extracted problem number: $PROBLEM_NUMBER"
+            echo "number=$PROBLEM_NUMBER" >> $GITHUB_OUTPUT
+            echo "directory=$FIRST_PROBLEM" >> $GITHUB_OUTPUT
+          else
+            echo "Could not extract problem number from: $FIRST_PROBLEM"
+            exit 1
+          fi
 
-    - name: No changes detected
-      if: steps.detect-changes.outputs.has_changes == 'false'
-      run: |
-        echo "ℹ️ No LeetCode problem changes detected in this commit"
-        echo "   Only commits that modify problem directories trigger database updates"
+      - name: Check if README.en.md exists, create if needed
+        if: steps.detect-changes.outputs.has_changes == 'true'
+        run: |
+          PROBLEM_DIR="${{ steps.extract-number.outputs.directory }}"
+          PROBLEM_NUMBER="${{ steps.extract-number.outputs.number }}"
+
+          if [ ! -f "$PROBLEM_DIR/README.en.md" ]; then
+            echo "README.en.md not found for problem $PROBLEM_NUMBER, creating..."
+            npm run fix:english problem $PROBLEM_NUMBER
+          else
+            echo "README.en.md already exists for problem $PROBLEM_NUMBER"
+          fi
+
+      - name: Process and update database
+        if: steps.detect-changes.outputs.has_changes == 'true'
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          PROBLEM_NUMBER="${{ steps.extract-number.outputs.number }}"
+          echo "Processing problem number: $PROBLEM_NUMBER"
+
+          # Process the problem and update database
+          npm run data:process -- --problem=$PROBLEM_NUMBER
+
+          echo "✅ Successfully processed problem $PROBLEM_NUMBER"
+
+      - name: Commit English translation if created
+        if: steps.detect-changes.outputs.has_changes == 'true'
+        run: |
+          PROBLEM_DIR="${{ steps.extract-number.outputs.directory }}"
+
+          # Check if README.en.md was created and commit it
+          if [ -f "$PROBLEM_DIR/README.en.md" ]; then
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+
+            git add "$PROBLEM_DIR/README.en.md"
+
+            # Only commit if there are changes to commit
+            if ! git diff --staged --quiet; then
+              git commit -m "feat: Add English translation for problem ${{ steps.extract-number.outputs.number }}
+
+            🤖 Generated with Claude Code
+              Co-Authored-By: Claude <noreply@anthropic.com>"
+
+              git push
+              echo "✅ Committed English translation for problem ${{ steps.extract-number.outputs.number }}"
+            else
+              echo "ℹ️ No changes to commit for English translation"
+            fi
+          fi
+
+      - name: Update statistics
+        if: steps.detect-changes.outputs.has_changes == 'true'
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          echo "📊 Updated database statistics:"
+          npm run data:stats
+
+      - name: Report results
+        if: steps.detect-changes.outputs.has_changes == 'true'
+        run: |
+          PROBLEM_NUMBER="${{ steps.extract-number.outputs.number }}"
+          PROBLEM_DIR="${{ steps.extract-number.outputs.directory }}"
+
+          echo "🎉 LeetCode Auto Update Completed!"
+          echo "   📝 Problem: #$PROBLEM_NUMBER ($PROBLEM_DIR)"
+          echo "   ✅ Database updated successfully"
+          echo "   🌐 English translation processed"
+          echo "   📊 Statistics refreshed"
+
+      - name: No changes detected
+        if: steps.detect-changes.outputs.has_changes == 'false'
+        run: |
+          echo "ℹ️ No LeetCode problem changes detected in this commit"
+          echo "   Only commits that modify problem directories trigger database updates"

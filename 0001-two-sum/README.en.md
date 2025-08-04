@@ -1,3 +1,4 @@
+```html
 <h2><a href="https://leetcode.com/problems/two-sum">1. Two Sum</a></h2><h3>Easy</h3><hr><p>Given an integer array <code>nums</code> and an integer <code>target</code>, return the indices of the two numbers such that they add up to <code>target</code>.</p>
 
 <p>Each input is guaranteed to have <strong><em>exactly</em> one solution</strong>, and you may not use the same element twice.</p>
@@ -38,4 +39,5 @@
 </ul>
 
 <p>&nbsp;</p>
-<strong>Follow-up:&nbsp;</strong>Can you come up with an algorithm that is faster than <code>O(n<sup>2</sup>)</code>?
+<strong>Follow-up:&nbsp;</strong>Can you come up with an algorithm that is less than <code>O(n<sup>2</sup>)</code> time complexity?
+```

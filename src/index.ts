@@ -9,13 +9,12 @@ import { ProcessingOptions, ProcessingResult } from './types/index.js';
 
 class LeetCodeDataProcessor {
   private fileProcessor: FileProcessor;
-  private translator: Translator;
+  private translator: Translator | null = null;
   private blogGenerator: BlogGenerator;
   private supabaseService: SupabaseService | null = null;
 
   constructor() {
     this.fileProcessor = new FileProcessor();
-    this.translator = new Translator();
     this.blogGenerator = new BlogGenerator();
     
     // Supabase는 환경 변수가 제대로 설정된 경우에만 초기화
@@ -24,6 +23,16 @@ class LeetCodeDataProcessor {
     } catch (error) {
       console.log('⚠️  Supabase 초기화 실패 - 환경 변수를 확인하세요');
     }
+  }
+
+  /**
+   * 번역기 lazy initialization
+   */
+  private getTranslator(): Translator {
+    if (!this.translator) {
+      this.translator = new Translator();
+    }
+    return this.translator;
   }
 
   /**
@@ -47,7 +56,7 @@ class LeetCodeDataProcessor {
 
       // 2. 번역 실행
       console.log('🌐 번역 실행 중...');
-      const translationResult = await this.translator.translateProblem(problemInfo);
+      const translationResult = await this.getTranslator().translateProblem(problemInfo);
       console.log('✅ 번역 완료');
 
       // 3. 블로그 포스팅 생성

@@ -44,7 +44,7 @@ export class MarkdownParser {
   }
 
   /**
-   * 문제 설명 추출
+   * 문제 설명 추출 (예제 섹션 제거)
    */
   static extractDescription(content: string): string {
     // HTML 태그 제거하고 텍스트만 추출
@@ -56,12 +56,82 @@ export class MarkdownParser {
       .replace(/&amp;/g, '&');
 
     // 제목과 난이도 다음부터 제약사항 이전까지 추출
-    const descriptionMatch = cleanContent.match(/(?:어려움|중간|쉬움|Hard|Medium|Easy)\s*(.*?)(?:제약사항|Constraints):/s);
-    return descriptionMatch ? descriptionMatch[1].trim() : '';
+    let descriptionMatch = cleanContent.match(/(?:어려움|중간|쉬움|Hard|Medium|Easy)\s*(.*?)(?:제약사항|Constraints):/s);
+    let description = descriptionMatch ? descriptionMatch[1].trim() : '';
+    
+    // 예제 섹션 제거 ("예제 N:" 또는 "예시 N:" 패턴)
+    description = this.removeExampleSections(description);
+    
+    return description;
   }
 
   /**
-   * 예제 추출
+   * 영어 설명에서 예제 섹션들을 제거합니다.
+   */
+  static removeExampleSectionsEnglish(description: string): string {
+    let cleanedDescription = description;
+    
+    // Example 패턴들을 순차적으로 제거
+    const patterns = [
+      // "Example 1:" 부터 "Example 2:" 또는 "Constraints" 또는 문서 끝까지
+      /\s*Example\s+\d+\s*:[^\n]*[\s\S]*?(?=\s*Example\s+\d+\s*:|Constraints\s*:|Follow\s*up\s*:|Note\s*:|$)/gi,
+      
+      // 남은 단독 예제들
+      /\n\s*Example\s+\d+\s*:[^\n]*[\s\S]*?$/gi,
+      
+      // 중간에 있는 예제들
+      /\n\s*Example\s+\d+\s*:[^\n]*[\s\S]*?(?=\n\s*[A-Z][a-z]+\s*:)/gi,
+      
+      // 더 유연한 패턴
+      /\n\s*Example\s+\d+\s*:\s*[\s\S]*?(?=\n\s*\w+\s*:|$)/gi
+    ];
+    
+    patterns.forEach(pattern => {
+      cleanedDescription = cleanedDescription.replace(pattern, '');
+    });
+    
+    // 정리 작업
+    cleanedDescription = cleanedDescription
+      .replace(/\n\s*\n\s*\n+/g, '\n\n')
+      .replace(/\s+$/gm, '')
+      .trim();
+    
+    return cleanedDescription;
+  }
+
+  /**
+   * 한국어 설명에서 예제 섹션들을 제거합니다.
+   */
+  static removeExampleSections(description: string): string {
+    let cleanedDescription = description;
+    
+    // 한국어 예제 패턴들을 순차적으로 제거
+    const patterns = [
+      // "예제 1:" 또는 "예시 1:" 부터 다음 예제 또는 "제약" 또는 문서 끝까지
+      /\s*예[제시]\s*\d+\s*:[^\n]*[\s\S]*?(?=\s*예[제시]\s*\d+\s*:|제약[\s\S]*?:|Follow\s*up[\s\S]*?:|참고[\s\S]*?:|$)/g,
+      
+      // 남은 예제 섹션들
+      /\n\s*예[제시]\s*\d+\s*:[\s\S]*$/g,
+      
+      // 중간에 있는 예제 섹션들
+      /\n\s*예[제시]\s*\d+\s*:[\s\S]*?(?=\n\s*[가-힣A-Z])/g
+    ];
+    
+    patterns.forEach(pattern => {
+      cleanedDescription = cleanedDescription.replace(pattern, '');
+    });
+    
+    // 정리 작업
+    cleanedDescription = cleanedDescription
+      .replace(/\n\s*\n\s*\n+/g, '\n\n')
+      .replace(/\s+$/gm, '')
+      .trim();
+    
+    return cleanedDescription;
+  }
+
+  /**
+   * 예제 추출 (HTML 태그 정제 포함)
    */
   static extractExamples(content: string): Example[] {
     const examples: Example[] = [];
@@ -72,13 +142,23 @@ export class MarkdownParser {
     let match;
     while ((match = exampleRegex.exec(content)) !== null) {
       examples.push({
-        input: match[1].trim(),
-        output: match[2].trim(),
-        explanation: match[3]?.trim()
+        input: this.cleanExampleText(match[1].trim()),
+        output: this.cleanExampleText(match[2].trim()),
+        explanation: match[3] ? this.cleanExampleText(match[3].trim()) : undefined
       });
     }
 
     return examples;
+  }
+
+  /**
+   * 예제 텍스트에서 HTML 태그 제거
+   */
+  static cleanExampleText(text: string): string {
+    return text
+      .replace(/<\/strong>\s*/g, '') // </strong> 태그 제거
+      .replace(/<[^>]*>/g, '') // 기타 HTML 태그 제거
+      .trim();
   }
 
   /**

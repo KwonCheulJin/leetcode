@@ -3,6 +3,8 @@ import { LeetCodeProblemRecord, Database } from '../types/supabase.js';
 import { ProblemInfo } from '../types/leetcode.js';
 import { TranslationResult } from './translator.js';
 import { SlugGenerator } from '../utils/slugify.js';
+import { CodeFormatter } from '../utils/formatter.js';
+import { MarkdownParser } from '../utils/parser.js';
 
 export class SupabaseService {
   private client: SupabaseClient<Database>;
@@ -20,7 +22,7 @@ export class SupabaseService {
   }
 
   /**
-   * LeetCode 문제 데이터 저장
+   * LeetCode 문제 데이터 저장 (데이터 정제 포함)
    */
   async saveProblemData(
     problemInfo: ProblemInfo,
@@ -32,24 +34,27 @@ export class SupabaseService {
       // 기존 문제 데이터 확인
       const existingProblem = await this.checkExistingProblem(problemInfo.problemNumber);
 
+      // 데이터 정제
+      const cleanedData = this.cleanProblemData(problemInfo, translation);
+
       const problemData: LeetCodeProblemRecord = {
         problem_number: problemInfo.problemNumber,
         title: problemInfo.titleEnglish,
-        title_korean: translation.titleKorean,
+        title_korean: cleanedData.titleKorean,
         difficulty: problemInfo.difficulty,
         tags: problemInfo.tags,
-        description_english: problemInfo.descriptionEnglish,
-        description_korean: translation.descriptionKorean,
+        description_english: cleanedData.descriptionEnglish,
+        description_korean: cleanedData.descriptionKorean,
         constraints_english: problemInfo.constraints,
-        constraints_korean: translation.constraintsKorean,
-        examples: problemInfo.examples,
-        solution_code: problemInfo.solutionCode,
+        constraints_korean: cleanedData.constraintsKorean,
+        examples: cleanedData.examples,
+        solution_code: cleanedData.solutionCode,
         solution_language: problemInfo.solutionLanguage,
-        explanation_korean: translation.explanation,
-        approach_korean: translation.approach,
-        time_complexity: translation.timeComplexity,
-        space_complexity: translation.spaceComplexity,
-        slug: SlugGenerator.createBlogSlug(translation.titleKorean, problemInfo.problemNumber),
+        explanation_korean: cleanedData.explanation,
+        approach_korean: cleanedData.approach,
+        time_complexity: cleanedData.timeComplexity,
+        space_complexity: cleanedData.spaceComplexity,
+        slug: SlugGenerator.createSlug(cleanedData.titleKorean, problemInfo.problemNumber),
         leetcode_url: problemInfo.leetcodeUrl,
         github_url: problemInfo.githubUrl,
         is_premium: false,
@@ -164,6 +169,133 @@ export class SupabaseService {
   }
 
   /**
+   * 문제 데이터 정제 (예제 섹션 제거, HTML 태그 정제, 코드 포매팅)
+   */
+  private cleanProblemData(
+    problemInfo: ProblemInfo,
+    translation: TranslationResult
+  ): TranslationResult & { 
+    descriptionEnglish: string;
+    examples: any[];
+    solutionCode: string;
+  } {
+    // 1. 영어 설명에서 예제 섹션 제거
+    const cleanedDescriptionEnglish = this.cleanDescriptionEnglish(problemInfo.descriptionEnglish);
+    
+    // 2. 한국어 설명에서 예제 섹션 제거
+    const cleanedDescriptionKorean = this.cleanDescriptionKorean(translation.descriptionKorean);
+    
+    // 3. Examples 배열에서 HTML 태그 제거
+    const cleanedExamples = this.cleanExamples(problemInfo.examples);
+    
+    // 4. Solution Code 포매팅
+    const formattedCode = CodeFormatter.formatCode(problemInfo.solutionCode, problemInfo.solutionLanguage);
+    
+    return {
+      ...translation,
+      descriptionEnglish: cleanedDescriptionEnglish,
+      descriptionKorean: cleanedDescriptionKorean,
+      examples: cleanedExamples,
+      solutionCode: formattedCode
+    };
+  }
+
+  /**
+   * 영어 설명에서 예제 섹션을 제거합니다.
+   */
+  private cleanDescriptionEnglish(description: string): string {
+    let cleanedDescription = description;
+    
+    // Example 패턴들을 순차적으로 제거
+    const patterns = [
+      // "Example 1:" 부터 "Example 2:" 또는 "Constraints" 또는 문서 끝까지
+      /\s*Example\s+\d+\s*:[^\n]*[\s\S]*?(?=\s*Example\s+\d+\s*:|Constraints\s*:|Follow\s*up\s*:|Note\s*:|$)/gi,
+      
+      // 남은 단독 예제들
+      /\n\s*Example\s+\d+\s*:[^\n]*[\s\S]*?$/gi,
+      
+      // 중간에 있는 예제들 (다른 섹션 전까지)
+      /\n\s*Example\s+\d+\s*:[^\n]*[\s\S]*?(?=\n\s*[A-Z][a-z]+\s*:)/gi,
+      
+      // 더 유연한 패턴 (공백과 줄바꿈을 고려)
+      /\n\s*Example\s+\d+\s*:\s*[\s\S]*?(?=\n\s*\w+\s*:|$)/gi
+    ];
+    
+    // 각 패턴을 순차적으로 적용
+    patterns.forEach(pattern => {
+      cleanedDescription = cleanedDescription.replace(pattern, '');
+    });
+    
+    // 정리 작업
+    cleanedDescription = cleanedDescription
+      .replace(/\n\s*\n\s*\n+/g, '\n\n') // 연속된 줄바꿈 정리
+      .replace(/\s+$/gm, '') // 각 라인 끝의 공백 제거
+      .trim(); // 앞뒤 공백 제거
+    
+    return cleanedDescription;
+  }
+
+  /**
+   * 한국어 설명에서 예제 섹션을 제거합니다.
+   */
+  private cleanDescriptionKorean(description: string): string {
+    let cleanedDescription = description;
+    
+    // 한국어 예제 패턴들을 순차적으로 제거
+    const patterns = [
+      // "예제 1:" 또는 "예시 1:" 부터 다음 예제 또는 "제약" 또는 문서 끝까지
+      /\s*예[제시]\s*\d+\s*:[^\n]*[\s\S]*?(?=\s*예[제시]\s*\d+\s*:|제약[\s\S]*?:|Follow\s*up[\s\S]*?:|참고[\s\S]*?:|$)/g,
+      
+      // 남은 예제 섹션들 (단독으로 존재하는 경우)
+      /\n\s*예[제시]\s*\d+\s*:[\s\S]*$/g,
+      
+      // 중간에 있는 예제 섹션들
+      /\n\s*예[제시]\s*\d+\s*:[\s\S]*?(?=\n\s*[가-힣A-Z])/g
+    ];
+    
+    patterns.forEach(pattern => {
+      cleanedDescription = cleanedDescription.replace(pattern, '');
+    });
+    
+    // 정리 작업
+    cleanedDescription = cleanedDescription
+      .replace(/\n\s*\n\s*\n+/g, '\n\n') // 연속된 줄바꿈 정리
+      .replace(/\s+$/gm, '') // 각 라인 끝의 공백 제거
+      .trim(); // 앞뒤 공백 제거
+    
+    return cleanedDescription;
+  }
+
+  /**
+   * Examples 배열에서 HTML 태그 제거
+   */
+  private cleanExamples(examples: any[]): any[] {
+    if (!Array.isArray(examples)) {
+      return examples;
+    }
+    
+    return examples.map(example => {
+      if (typeof example === 'object' && example !== null) {
+        const cleanedExample = { ...example };
+        
+        // input, output, explanation 필드에서 </strong> 태그 제거
+        if (typeof cleanedExample.input === 'string') {
+          cleanedExample.input = cleanedExample.input.replace(/<\/strong>\s*/g, '');
+        }
+        if (typeof cleanedExample.output === 'string') {
+          cleanedExample.output = cleanedExample.output.replace(/<\/strong>\s*/g, '');
+        }
+        if (typeof cleanedExample.explanation === 'string') {
+          cleanedExample.explanation = cleanedExample.explanation.replace(/<\/strong>\s*/g, '');
+        }
+        
+        return cleanedExample;
+      }
+      return example;
+    });
+  }
+
+  /**
    * 여러 포스팅 일괄 삽입
    */
   async batchInsertPosts(
@@ -179,7 +311,7 @@ export class SupabaseService {
 
     for (const { problemInfo, translation } of postsData) {
       try {
-        await this.saveBlogPost(problemInfo, translation);
+        await this.saveProblemData(problemInfo, translation);
         successCount++;
         console.log(`✅ 진행률: ${successCount + failedCount}/${postsData.length}`);
       } catch (error) {

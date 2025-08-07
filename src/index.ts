@@ -3,19 +3,16 @@
 import 'dotenv/config';
 import { FileProcessor } from './services/fileProcessor.js';
 import { Translator } from './services/translator.js';
-import { BlogGenerator } from './services/blogGenerator.js';
 import { SupabaseService } from './services/supabase.js';
 import { ProcessingOptions, ProcessingResult } from './types/index.js';
 
 class LeetCodeDataProcessor {
   private fileProcessor: FileProcessor;
   private translator: Translator | null = null;
-  private blogGenerator: BlogGenerator;
   private supabaseService: SupabaseService | null = null;
 
   constructor() {
     this.fileProcessor = new FileProcessor();
-    this.blogGenerator = new BlogGenerator();
     
     // Supabase는 환경 변수가 제대로 설정된 경우에만 초기화
     try {
@@ -59,12 +56,8 @@ class LeetCodeDataProcessor {
       const translationResult = await this.getTranslator().translateProblem(problemInfo);
       console.log('✅ 번역 완료');
 
-      // 3. 블로그 포스팅 생성
-      console.log('📝 블로그 포스팅 생성 중...');
-      const blogPost = await this.blogGenerator.generateBlogPost(problemInfo, translationResult);
-      console.log('✅ 블로그 포스팅 생성 완료');
 
-      // 4. Supabase에 저장 (옵션)
+      // 3. Supabase에 저장 (옵션)
       if (this.supabaseService && !options.dryRun) {
         console.log('💾 데이터베이스에 저장 중...');
         const saveResult = await this.supabaseService.saveProblemData(problemInfo, translationResult);

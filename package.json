@@ -23,7 +23,15 @@
     "fix:english": "tsx scripts/fix-english-readmes.ts",
     "fix:html": "tsx scripts/fix-html-codeblocks.ts",
     "auto:detect-changes": "tsx scripts/detect-problem-changes.ts",
-    "auto:test-workflow": "tsx scripts/test-github-workflow.ts"
+    "auto:test-workflow": "tsx scripts/test-github-workflow.ts",
+    "data:fix": "tsx scripts/fix-leetcode-data.ts",
+    "data:fix-descriptions": "tsx scripts/fix-descriptions.ts",
+    "data:fix-inconsistencies": "tsx scripts/fix-data-inconsistencies.ts",
+    "migrate:html": "tsx scripts/migrate-to-html-constraints.ts",
+    "math:check": "tsx scripts/check-math-notation-issues.ts",
+    "math:fix": "tsx scripts/fix-math-notation.ts",
+    "constraints:check": "tsx scripts/check-two-sum-constraints.ts",
+    "html:check": "tsx scripts/check-html-results.ts"
   },
   "keywords": [],
   "author": "",

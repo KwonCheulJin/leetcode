@@ -1,65 +1,63 @@
-## [2726. Calculator with Method Chaining](https://leetcode.com/problems/calculator-with-method-chaining)
+<h2><a href="https://leetcode.com/problems/calculator-with-method-chaining">2726. Calculator with Method Chaining</a></h2><h3>Easy</h3><hr><p><code>Calculator</code> 클래스를 설계하세요. 이 클래스는 덧셈, 뺄셈, 곱셈, 나눗셈 및 지수 연산을 제공해야 합니다. 또 메소드 체이닝을 사용하여 연속적인 연산을 수행할 수 있어야 합니다. <code>Calculator</code> 클래스 생성자는 숫자를 받아들이며, 이는 <code>result</code>의 초기값 역할을 합니다.</p>
 
-### Easy
+<p><font face="monospace"><code>Calculator</code>&nbsp;</font>클래스는 다음과 같은 메소드를 가져야 합니다:</p>
 
-Design a `Calculator` class. This class should provide addition, subtraction, multiplication, division, and exponentiation operations. It should also allow for method chaining to perform consecutive operations. The constructor of the `Calculator` class accepts a number, which serves as the initial value of `result`.
+<ul>
+	<li><code>add</code> - 주어진 숫자 <code>value</code>를 <code>result</code>에 더하고 갱신된 <code>Calculator</code>를 반환하는 메소드입니다.</li>
+	<li><code>subtract</code> -<code>value</code>를 <code>result</code>에서 빼고 갱신된 <code>Calculator</code>를 반환하는 메소드입니다.</li>
+	<li><code>multiply</code> -<code>value</code>로 <code>result</code>를 곱하고 갱신된 <code>Calculator</code>를 반환하는 메소드입니다.</li>
+	<li><code>divide</code> -<code>value</code>로 <code>result</code>를 나누고 갱신된 <code>Calculator</code>를 반환하는 메소드입니다. 전달된 값이 <code>0</code>이라면 <code>&quot;Division by zero is not allowed&quot;</code>라는 오류가 발생해야 합니다.</li>
+	<li><code>power</code> -<code>value</code>에 <code>result</code>를 지수로 올리고 갱신된 <code>Calculator</code>를 반환하는 메소드입니다.</li>
+	<li><code>getResult</code> -<code>result</code>를 반환하는 메소드입니다.</li>
+</ul>
 
-`Calculator` class should have the following methods:
+<p>실제 결과와 <code>10<sup>-5</sup></code> 내에 있는 해답은 정확하다고 간주됩니다.</p>
 
-- ```add` - A method that adds the given number `value` to `result` and returns the updated `Calculator`.``
-- ```subtract` - A method that subtracts `value` from `result` and returns the updated `Calculator`.``
-- ```multiply` - A method that multiplies `result` by `value` and returns the updated `Calculator`.``
-- ```divide` - A method that divides `result` by `value` and returns the updated `Calculator`. If the provided value is `0`, it should throw an error with the message `&quot;Division by zero is not allowed&quot;`.``
-- ```power` - A method that raises `result` to the power of `value` and returns the updated `Calculator`.``
-- ```getResult` - A method that returns `result`.``
+<p>&nbsp;</p>
+<p><strong class="example">예시 1:</strong></p>
 
-The result is considered accurate if it is within 10⁴ of the actual result.
-
- 
-
-**Example 1:**
-
-```
-**Input:**
+<pre>
+<strong>입력:</strong>
 actions = ["Calculator", "add", "subtract", "getResult"],
 values = [10, 5, 7]
-**Output:** 8
-**Explanation:**
+<strong>출력:</strong> 8
+<strong>설명:</strong>
 new Calculator(10).add(5).subtract(7).getResult() // 10 + 5 - 7 = 8
-```
+</pre>
 
-**Example 2:**
+<p><strong class="example">예시 2:</strong></p>
 
-```
-**Input:**
+<pre>
+<strong>입력:</strong>
 actions = ["Calculator", "multiply", "power", "getResult"],
 values = [2, 5, 2]
-**Output:** 100
-**Explanation:**
+<strong>출력:</strong> 100
+<strong>설명:</strong>
 new Calculator(2).multiply(5).power(2).getResult() // (2 * 5) ^ 2 = 100
-```
+</pre>
 
-**Example 3:**
+<p><strong class="example">예시 3:</strong></p>
 
-```
-**Input:**
+<pre>
+<strong>입력:</strong>
 actions = ["Calculator", "divide", "getResult"],
 values = [20, 0]
-**Output:** "Division by zero is not allowed"
-**Explanation:**
+<strong>출력:</strong> "Division by zero is not allowed"
+<strong>설명:</strong>
 new Calculator(20).divide(0).getResult() // 20 / 0
 
-An error should occur because division by zero is not allowed.
-```
+0으로 나눌 수 없기 때문에 오류가 발생해야 합니다.
+</pre>
 
- 
+<p>&nbsp;</p>
+<p><strong>제약 조건:</strong></p>
 
-**Constraints:**
-
-- ```actions` is a valid JSON string array``
-- ```values` is a valid JSON number array``
-2 
-1 
-- ```actions[i]` is one of "Calculator", "add", "subtract", "multiply", "divide", "power", "getResult"``
-- The first action is always "Calculator".
-- The last action is always "getResult".
+<ul>
+	<li><code>actions</code>는 유효한 JSON 문자열 배열입니다</li>
+	<li><code>values</code>는 유효한 JSON 숫자 배열입니다</li>
+	<li><code>2 &lt;= actions.length &lt;= 2 * 10<sup>4</sup></code></li>
+	<li><code>1 &lt;= values.length &lt;= 2 * 10<sup>4</sup>&nbsp;- 1</code></li>
+	<li><code>actions[i]</code>는 &quot;Calculator&quot;, &quot;add&quot;, &quot;subtract&quot;, &quot;multiply&quot;, &quot;divide&quot;, &quot;power&quot;, &quot;getResult&quot; 중 하나입니다</li>
+	<li>첫 번째 action은 항상 &quot;Calculator&quot;입니다</li>
+	<li>마지막 action은 항상 &quot;getResult&quot;입니다</li>
+</ul>
